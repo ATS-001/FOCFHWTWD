@@ -1,11 +1,29 @@
-<div align="center">
+# FOCFHWTWD Learning Platform
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Foundations Of Computing, From HardWare To WebDesign (KTU 2024 Scheme)
 
-  <h1>Built with AI Studio</h2>
+## Overview
+This platform is a comprehensive study guide and interactive learning tool for students pursuing the FOCFHWTWD subject. It organizes complex topics from hardware binary logic to modern web architecture into accessible modules.
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Architecture
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS v4
+- **Animations**: Framer Motion (motion/react)
+- **Icons**: Lucide React
+- **Typography**: Inter (Body), JetBrains Mono (Technical/Data)
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Structure
+1. **Module 1: Computer Hardware** - CPU, Memory Hierarchy, Motherboard, I/O.
+2. **Module 2: Foundations of Computing** - Number systems, Arithmetic, ISA.
+3. **Module 3: Software & Communication** - OS, Shell, Networking, Security.
+4. **Module 4: Web Design** - HTML, CSS, JavaScript basics.
 
-</div>
+## Development Constraints
+- **Technical Aesthetic**: High contrast, grid-based, modular design.
+- **Mobile First**: Fully responsive layout for all device sizes.
+- **Academic Rigor**: Content distilled from official KTU syllabus materials.
+
+## Creator
+Created by **Aaron Thalakkottor Sooraj** as part of the **HexnicAI** ecosystem.
+
+© 2026 HexnicAI || Part of ATS_PDZ
