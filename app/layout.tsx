@@ -13,8 +13,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'FOCFHWTWD | Foundations of Computing',
+  title: 'FOCFHWTWD | From Hardware to Web Design',
   description: 'Foundations Of Computing, From HardWare To WebDesign - KTU 2024 Scheme',
+  icons: {
+    icon: 'https://hexnicai.vercel.app/favicon.ico',
+    shortcut: 'https://hexnicai.vercel.app/favicon.ico',
+    apple: 'https://hexnicai.vercel.app/favicon.ico',
+  },
   openGraph: {
     title: 'FOCFHWTWD Learning Platform',
     description: 'Master Foundations of Computing from Hardware to Web Design.',
@@ -22,14 +27,18 @@ export const metadata: Metadata = {
   }
 };
 
+import { ThemeProvider } from '@/lib/theme-context';
+import { ThemeSwitcher } from '@/components/theme-switcher';
+
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <head>
-        <link rel="icon" href="https://hexnicai.vercel.app/favicon.ico" />
-      </head>
-      <body className="font-sans antialiased bg-[#fdfdfd] text-[#1a1a1a]" suppressHydrationWarning>
-        {children}
+      <head />
+      <body className="font-sans antialiased" suppressHydrationWarning>
+        <ThemeProvider>
+          {children}
+          <ThemeSwitcher />
+        </ThemeProvider>
       </body>
     </html>
   );

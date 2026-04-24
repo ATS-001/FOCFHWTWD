@@ -12,37 +12,85 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
-}
 
-@theme {
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-}
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #fafafa;
+    --text-primary: #000000;
+    --text-secondary: #4b5563;
+    --border-primary: #000000;
+    --accent-primary: #000000;
+    --card-bg: #ffffff;
+    --high-yield-bg: #fefce8;
+    --high-yield-text: #713f12;
+  }
 
-@layer base {
+  [data-theme='aquatic'] {
+    --bg-primary: #121212;
+    --bg-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #9ca3af;
+    --border-primary: #333333;
+    --accent-primary: #66d9ef;
+    --card-bg: #1e1e1e;
+    --high-yield-bg: #0e1e25;
+    --high-yield-text: #66d9ef;
+  }
+
+  [data-theme='desert'] {
+    --bg-primary: #fffaf0;
+    --bg-secondary: #fdf5e6;
+    --text-primary: #2b2b2b;
+    --text-secondary: #5a5a5a;
+    --border-primary: #2b2b2b;
+    --accent-primary: #d2b48c;
+    --card-bg: #fdfdfd;
+    --high-yield-bg: #f5f5dc;
+    --high-yield-text: #4a4a4a;
+  }
+
+  [data-theme='dusk'] {
+    --bg-primary: #2d3436;
+    --bg-secondary: #262a2b;
+    --text-primary: #ffffff;
+    --text-secondary: #dfe6e9;
+    --border-primary: #636e72;
+    --accent-primary: #74b9ff;
+    --card-bg: #2d3436;
+    --high-yield-bg: #222f3e;
+    --high-yield-text: #74b9ff;
+  }
+
+  [data-theme='night'] {
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --border-primary: #333333;
+    --accent-primary: #a29bfe;
+    --card-bg: #111111;
+    --high-yield-bg: #1a1a2e;
+    --high-yield-text: #a29bfe;
+  }
+
   body {
-    @apply font-sans;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    @apply font-sans transition-colors duration-300;
   }
 }
 
 @theme {
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
-}
-
-@layer base {
-  body {
-    @apply font-sans;
-  }
-}
-
-@theme {
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-}
-
-@layer base {
-  body {
-    @apply font-sans;
-  }
+  
+  --color-th-bg: var(--bg-primary);
+  --color-th-bg-secondary: var(--bg-secondary);
+  --color-th-text: var(--text-primary);
+  --color-th-text-secondary: var(--text-secondary);
+  --color-th-border: var(--border-primary);
+  --color-th-accent: var(--accent-primary);
+  --color-th-card: var(--card-bg);
+  --color-th-yield-bg: var(--high-yield-bg);
+  --color-th-yield-text: var(--high-yield-text);
 }

@@ -33,167 +33,394 @@ export const MODULES_DATA: Module[] = [
     icon: Cpu,
     topics: [
       { 
-        name: 'Central Processing Unit', 
-        summary: 'The technical brain of the system, responsible for arithmetic, logical, and control operations.',
-        content: `The **Central Processing Unit (CPU)** is the engine that drives the entire computer system. It is often referred to as the "brain" because it performs the actual data processing, manipulation, and calculations that turn raw data into useful information. 
+        name: 'System Foundations & Architecture', 
+        summary: 'Core definitions and the structural logic of the Von Neumann model.',
+        content: `### Computer Systems
+A computer is an electronic device that processes data according to a set of instructions. It consists of two primary parts:
+- **Hardware**: The physical, tangible components (circuits, chips, cables).
+- **Software**: The intangible sets of instructions that tell the hardware what to do.
 
 ### Von Neumann Architecture
-Most modern CPUs are built upon the **Von Neumann Architecture**, characterized by a single shared memory for both programs (instructions) and data. This design allows the computer to be flexible, as it can change its behavior simply by loading a different program into memory.
+Most modern computing systems follow the **Von Neumann Architecture**, proposed in 1945. Its key principle is the **Stored Program Concept**, where both program instructions and data are stored in the same electronic memory.
 
-### Internal Components
-- **Arithmetic Logic Unit (ALU)**: This is where "processing" actually happens. It performs two types of operations:
-    1. **Arithmetic**: Addition, subtraction, multiplication, and division.
-    2. **Logical**: Comparison of values (e.g., $A > B$) and bitwise logic like AND, OR, NOT, and XOR.
-- **Control Unit (CU)**: The manager of the CPU. It handles processor control signals, directs the flow of data between different parts of the computer (CPU, memory, I/O), and manages the instruction cycle.
-- **Registers**: These are extremely fast, small storage locations built directly into the processor to hold data temporarily during execution. 
-    - **Accumulator (ACC)**: Stores the intermediate result of calculations.
-    - **Instruction Register (IR)**: Holds the current instruction being executed.
-    - **Program Counter (PC)**: Tracks the address of the next instruction to be fetched.
-    - **Memory Address Register (MAR)** and **Memory Data Register (MDR)**: Faciliate communication with RAM.
-- **System Clock**: Generates pulses at a fixed rate (measured in GHz) to synchronize all internal operations.
-
-### Classification and Performance
-CPUs are classified by their number of **cores**—independent processing units.
-- **Single-Core**: One instruction at a time; struggles with heavy multitasking.
-- **Dual-Core / Multi-Core**: Multiple units (Quad, Hexa, Octa-core) that can handle multiple tasks simultaneously, significantly improving system responsiveness.
-
-Performance is further optimized in modern systems through **Specialized CPUs**:
-- **GPUs (Graphics Processing Units)**: Optimized for parallel computations needed for imagery and 3D rendering.
-- **TPUs (Tensor Processing Units)**: Specifically designed for high-throughput machine learning tasks.`,
+**Key Components:**
+1. **CPU (Central Processing Unit)**: The "brain" that executes instructions.
+2. **Memory Unit**: Stores data and instructions.
+3. **I/O Devices**: Provides interaction with the external world.
+4. **Buses**: The communication pathways between these components.`,
         visual: {
-          type: 'flow',
-          data: ['Instruction Fetch', 'Opcode Decode', 'ALU Execution', 'Result Storage']
+          type: 'layers',
+          data: ['Input Device', 'CPU (CU + ALU)', 'Memory Unit', 'Output Device']
         },
         examFocus: [
-          'Detailed sequence of events during CPU instruction execution.',
-          'Function of ALU, CU, and Registers (PC, IR, ACC).',
-          'CPU Performance metrics (Clock speed, Cores, Threads).'
+          'Difference between Hardware and Software.',
+          'The concept of the Stored Program model.',
+          'Diagramming basic Von Neumann blocks.'
         ],
         details: [
-          { title: 'Arithmetic Logic Unit (ALU)', description: 'Performs arithmetic (ADD, SUB, MUL, DIV) and logical (AND, OR, NOT, XOR) operations. Works directly with data from registers.' },
-          { title: 'Control Unit (CU)', description: 'Directs and coordinates activities. Decodes instructions and sends control signals to ALU, memory, and I/O components.' },
-          { title: 'Internal Registers', description: 'Small, high-speed storage. Accumulator (ACC) for results, Instruction Register (IR) for current command, and Program Counter (PC) for next instruction address.' },
-          { title: 'Core Classification', description: 'Single-Core (one unit), Dual-Core (two units), and Multi-Core (Quad, Hexa, Octa). Multi-core allows simultaneous task handling.' }
+          { title: 'Computer', description: 'An integrated system of functional units that performs data processing.' },
+          { title: 'Hardware', description: 'Physical components like the CPU, RAM, Motherboard, and Storage.' },
+          { title: 'Software', description: 'Collections of programs and data that run on the hardware.' },
+          { title: 'Von Neumann Architecture', description: 'A design with a single processing unit and a single memory for programs and data.' }
         ]
       },
       { 
-        name: 'Memory Hierarchy Design', 
-        summary: 'A structured arrangement of storage types balancing speed, cost, and volatility.',
-        content: `In computer design, no single storage medium can be infinitely large, infinitely fast, and infinitely cheap. To solve this, engineers use a **Memory Hierarchy**, a pyramid logic that places fast, expensive memory close to the CPU and larger, slower, cheaper memory further away.
+        name: 'The Central Processing Unit (CPU)', 
+        summary: 'Detailed internal structure: Control Unit, ALU, and the register set.',
+        content: `The CPU executes instructions through its internal subsystems:
 
-### The Hierarchical Layers
-- **L0: CPU Registers**: Fastest access (nanoseconds) but very limited capacity (Bytes to KB).
-- **L1/L2/L3: Cache Memory**: Built using **SRAM (Static RAM)**. It stores copies of frequently used data from main memory to reduce latency. L1 is the smallest and fastest; L3 is larger and often shared across CPU cores.
-- **L4: Main Memory (RAM)**: The workstation of the computer. Modern systems typically use **DRAM (Dynamic RAM)**, which is dense and affordable but volatile and needs constant refreshing.
-- **L5: Secondary Storage**: Long-term storage like **HDD** or **SSD**. Non-volatile; data remains after power is lost.
-- **L6: Tertiary Storage**: Archival storage like Magnetic Tapes or Cloud backups.
+### Major Components
+- **Control Unit (CU)**: The manager. It handles control signals, directs data flow, and manages the instruction cycle. It does not perform actual data processing.
+- **Arithmetic Logic Unit (ALU)**: The worker. It performs math (ADD, SUB) and comparisons (AND, OR, NOT).
+- **Registers**: Ultra-fast internal storage locations.
 
-### SRAM vs DRAM
-- **SRAM (Static RAM)**: Faster, more expensive, used for Cache. It uses flip-flops to hold bits and does not require periodic refreshing.
-- **DRAM (Dynamic RAM)**: Slower, cheaper, used for Main Memory. It uses capacitors that leak charge, hence it requires thousands of refresh cycles per second to retain data.
+### Detailed Register Set
+| Register | Full Name | Purpose |
+| :--- | :--- | :--- |
+| **PC** | Program Counter | Holds the address of the NEXT instruction to be fetched. |
+| **ACC** | Accumulator | Stores intermediate results of ALU calculations. |
+| **IR** | Instruction Register | Holds the actual current instruction being executed. |
+| **MAR** | Memory Address Register | Holds the memory address for a read/write operation. |
+| **MDR** | Memory Data Register | Holds the actual data being transferred to/from memory. |
+| **SP** | Stack Pointer | Tracks the top of the program stack (used for function calls). |
+| **Flags** | Status Register | Bits representing outcomes (Zero, Carry, Overflow, Sign). |
 
-### Virtual Memory
-When the computer runs out of physical RAM, it uses **Virtual Memory**, a management technique that trick the system into thinking it has more RAM by using the hard drive as an extension. 
-- It uses **Paging** where memory is divided into fixed-size blocks. 
-- A **Page Table** maps virtual addresses to physical ones. 
-- A **Page Fault** occurs when requested data is not in RAM, forcing the OS to swap it in from the disk (Swap Space).`,
+### System Clock
+Generates pulses at a fixed rate (GHz) to synchronize all internal operations. One "clock cycle" is the smallest unit of time for a CPU operation.`,
+        visual: {
+          type: 'flow',
+          data: ['Fetch (PC->MAR)', 'Decode (CU)', 'Execute (ALU)', 'Store (MDR)']
+        },
+        examFocus: [
+          'Detailed roles of MAR, MDR, and PC.',
+          'Functionality of the Control Unit vs ALU.',
+          'Definition of Clock Speed and GHz metrics.'
+        ],
+        details: [
+          { title: 'Control Unit (CU)', description: 'Directs the operation of the processor. It tells the memory, ALU, and I/O how to respond to instructions.' },
+          { title: 'ALU', description: 'Performs all calculations and logical decisions.' },
+          { title: 'Accumulator (ACC)', description: 'A general-purpose register that stores the output of the ALU.' },
+          { title: 'Flags/Status Register', description: 'Contains individual bits (Z, C, S, V) that indicate the results of the last operation.' }
+        ]
+      },
+      { 
+        name: 'Memory Hierarchy & RAM', 
+        summary: 'Balanced storage design: SRAM vs DRAM and hierarchical standards.',
+        content: `### Memory Hierarchy
+No single memory is perfect. We use a hierarchy to balance **Speed, Cost, and Capacity**:
+- **Registers**: Fastest, smallest, inside CPU.
+- **Cache**: Fast SRAM, between CPU and RAM.
+- **Primary Memory (RAM)**: Main workspace, volatile.
+- **Secondary Memory**: Large, non-volatile (HDD/SSD).
+
+### RAM (Random Access Memory)
+RAM is volatile—data is lost when power is cut. It has two main types:
+
+1. **DRAM (Dynamic RAM)**:
+   - Uses capacitors (charge leaks, needs constant refresh).
+   - Slower but much cheaper and denser.
+   - Used for main system memory.
+2. **SRAM (Static RAM)**:
+   - Uses flip-flops (retains state without refresh as long as power is on).
+   - Extremely fast but expensive/bulky.
+   - Used for CPU Cache.
+
+### ROM (Read Only Memory)
+Non-volatile; used for critical firmware.
+- **PROM**: Programmable once.
+- **EPROM**: Erasable by UV light and reprogrammable.
+- **EEPROM**: Erasable electrically. Basis of Flash memory.`,
         visual: {
           type: 'pyramid',
           data: [
             { label: 'Registers', color: 'bg-red-500' },
-            { label: 'Cache (SRAM)', color: 'bg-orange-500' },
-            { label: 'Main Memory (DRAM)', color: 'bg-yellow-500' },
-            { label: 'Secondary (HDD/SSD)', color: 'bg-green-500' },
-            { label: 'Archive (Tape/Cloud)', color: 'bg-blue-500' }
+            { label: 'Cache (L1-L3)', color: 'bg-orange-500' },
+            { label: 'Main Memory (RAM)', color: 'bg-yellow-500' },
+            { label: 'Secondary (Disk)', color: 'bg-green-500' }
           ]
         },
         examFocus: [
-          'Hierarchy levels from registers to secondary storage.',
-          'Advantages of SSD over HDD.',
-          'Difference between SRAM (Cache) and DRAM (Main Memory).',
-          'Virtual memory and usage of swap space/page faults.'
+          'Differences between SRAM and DRAM.',
+          'Advantages/Disadvantages of RAM.',
+          'Types of ROM: PROM, EPROM, EEPROM.'
         ],
         details: [
-          { title: 'Primary Memory (RAM/ROM)', description: 'RAM (Random Access): Volatile, fast, used for active programs. ROM (Read Only): Non-volatile, used for firmware/BIOS.' },
-          { title: 'SRAM vs DRAM', description: 'SRAM: Built with flip-flops, no refresh needed, used for Cache. DRAM: Built with capacitors, needs constant refresh, used for Main Memory.' },
-          { title: 'Level Structure (L0 - L6)', description: 'L0: CPU Registers (ns) | L1-L3: Cache (SRAM) | L4: Main Memory (DRAM) | L5: Secondary (HDD/SSD) | L6: Tertiary (Tape/Cloud).' },
-          { title: 'Virtual Memory', description: 'A memory management technique that uses secondary storage to simulate larger contiguous RAM. Handles "Page Faults" via demand paging.' }
+          { title: 'Primary Memory', description: 'Directly accessible by the CPU. Includes RAM, Cache, and ROM.' },
+          { title: 'Secondary Memory', description: 'Used for long-term storage of files and OS. Non-volatile.' },
+          { title: 'Volatility', description: 'The characteristic of memory where data is erased when power is lost.' },
+          { title: 'Data Access Methods', description: 'Sequential (Tape) vs Direct (Disk/RAM) access.' }
         ]
       },
       { 
-        name: 'Storage & RAID Technology', 
-        summary: 'Non-volatile data persistence solutions comparing mechanical HDDs and flash-based SSDs.',
-        content: `Mass storage is essential for holding the OS, applications, and your files permanently.
+        name: 'Cache & Virtual Memory', 
+        summary: 'Optimization logic: Multi-level caches and logical address mapping.',
+        content: `### Cache Memory (In Detail)
+Cache reduces the speed gap between the fast CPU and slow RAM using the **Locality of Reference**.
+- **L1 Cache**: Smallest, fastest, integrated into CPU core.
+- **L2 Cache**: Larger, slightly slower, often per core.
+- **L3 Cache**: Shared among all CPU cores.
+- **L4 Cache**: Rare, found in high-end specialized processors.
 
-### Hard Disk Drives (HDD)
-HDDs are traditional mechanical storage devices.
-- **Internals**: They consist of spinning circular disks called **Platters**. A magnetic **Read/Write Head** hovers over the surface to access data.
-- **Structure**: Data is organized into **Tracks** (concentric circles) and **Sectors** (the smallest units of readable data). A **Cylinder** represents the same track number across all platters.
-- **Latency**: Performance is hindered by **Seek Time** (moving the arm) and **Rotational Latency** (waiting for the platter to rotate).
+### Virtual Memory
+A management technique where the OS uses secondary storage (HDD/SSD) to simulate more RAM.
 
-### Solid State Drives (SSD)
-Modern SSDs have no moving parts, making them faster, quieter, and more robust.
-- **Technology**: They use **NAND Flash Memory** with floating-gate transistors.
-- **Management**: An internal **Controller** acts as the brain, handling data mapping.
-- **Garbage Collection**: SSDs cannot overwrite data directly. They must erase blocks before writing, involving a background process called garbage collection to reclaim invalid pages.
+**How it Works:**
+1. **Paging**: Memory is divided into fixed-size "Pages" (logical) and "Frames" (physical).
+2. **Page Table**: Maps virtual addresses used by programs to physical addresses in RAM.
+3. **Address Translation**: The **MMU (Memory Management Unit)** hardware handles the address conversion.
+4. **Page Fault**: Occurs when requested data isn't in RAM. The OS fetches it from the **Swap Space** on the disk.
 
-### RAID (Redundant Array of Independent Disks)
-RAID groups multiple physical disks to improve reliability or speed:
-- **RAID 0 (Striping)**: Splits data across disks for speed. If one disk fails, ALL data is lost.
-- **RAID 1 (Mirroring)**: Copies data to two disks for safety. Half the storage is usable.
-- **RAID 5 (Parity)**: Balance of speed and safety. Uses parity information to rebuild data if one disk fails.
-- **RAID 10**: Combines mirroring and striping for top performance and safety.`,
+### Advantages & Disadvantages
+- **Pros**: Run larger programs, multitasking, better CPU utilization.
+- **Cons**: Slower performance (disk access is slow), **Thrashing** (excessive swapping).`,
+        visual: {
+          type: 'flow',
+          data: ['CPU Request', 'MMU Look-up', 'Page Table Check', 'RAM Access OR Swap']
+        },
+        examFocus: [
+          'Difference between L1, L2, and L3 cache.',
+          'Concepts of Paging and Page Replacement.',
+          'Role of the MMU in address translation.'
+        ],
+        details: [
+          { title: 'Locality of Reference', description: 'Temporal (recently used data) and Spatial (nearby data) access patterns.' },
+          { title: 'Swap Space/Page File', description: 'The reserved area on the disk used to extend physical RAM.' },
+          { title: 'MMU', description: 'The hardware component responsible for mapping virtual to physical addresses.' },
+          { title: 'Thrashing', description: 'A state where the system spends more time swapping pages than executing instructions.' }
+        ]
+      },
+      { 
+        name: 'Storage Technologies: HDD vs SSD', 
+        summary: 'Mechanical magnetic platters vs high-speed NAND flash memory.',
+        content: `### Hard Disk Drive (HDD)
+- **Structure**: Uses spinning **Magnetic Platters**, **Track/Sector** layout, and a mechanical **Read/Write Head**.
+- **Performance**: Limited by seek time and rotational latency.
+- **Pros**: Low cost per GB, high capacity.
+- **Cons**: Fragile, slow, noisy.
+
+### Solid State Drive (SSD)
+- **Structure**: Uses **NAND Flash Memory** (Floating gate transistors). No moving parts.
+- **Performance**: Near-instant access (0.1ms latency).
+- **Pros**: Very fast, durable, silent, low power.
+- **Cons**: Expensive, limited write life (though high today).
+
+### Optical Storage
+Uses laser light to read "Pits and Lands":
+1. **CD**: ~700MB.
+2. **DVD**: 4.7GB to 8.5GB (Dual Layer).
+3. **Blu-ray**: 25GB to 100GB (High-density laser focus).
+
+### Storage Comparison Table
+| Feature | HDD | SSD | Optical |
+| :--- | :--- | :--- | :--- |
+| **Speed** | Slow (~150MB/s) | Very Fast (500-7000MB/s) | Slowest |
+| **Durability** | Low (Shock-sensitive) | High | Moderate |
+| **Capacity** | Very High | High | Low/Medium |
+| **Cost** | Lowest | Medium/High | Low |`,
         visual: {
           type: 'grid-disks',
-          data: { title: 'Secondary Storage Architectures', layout: 'Magnetic HDD | Solid State SSD | Optical CD/DVD | Magnetic Tape' }
+          data: { title: 'Secondary Media Comparison', layout: 'Magnetic Disk | Flash Storage | Optical Media | Magnetic Tape' }
         },
         examFocus: [
-          'Characteristics of RAID levels (0, 1, 5, 10).',
-          'Striping vs Mirroring concept.',
-          'NAND flash memory used in SSDs.'
+          'Detailed comparison table of HDD, SSD, and Optical.',
+          'NAND Flash working principle.',
+          'Magnetic platter seek time vs latency.'
         ],
         details: [
-          { title: 'SSD Components', description: 'NAND Flash Memory Chips (Floating gate transistors) and SSD Controller (the brain). DRAM Cache is often used for mapping speed.' },
-          { title: 'RAID 0, 1, 5', description: 'RAID 0 (Striping): Speed focus. RAID 1 (Mirroring): Redundancy focus. RAID 5 (Parity): Balance of speed and data safety.' },
-          { title: 'RAID 10 (1+0)', description: 'Combines mirroring and striping. High performance and excellent fault tolerance (Safe if one disk in each pair fails).' },
-          { title: 'Optical Disks', description: 'Uses laser technology (pits and lands). CD (~700MB), DVD (4.7-8.5GB), Blu-ray (25-100GB). Increasingly obsolete due to Cloud/USB.' }
+          { title: 'Magnetic Tape', description: 'Sequential access storage used for long-term archival/backup in data centers.' },
+          { title: 'Track & Sector', description: 'Physical data organization on a magnetic platter disk.' },
+          { title: 'Floating Gate', description: 'The semiconductor transistor used to store data in SSD memory cells.' },
+          { title: 'Blu-ray', description: 'Uses a blue-violet laser with a shorter wavelength to pack data more densely.' }
         ]
       },
       { 
-        name: 'The Motherboard & I/O', 
-        summary: 'The connection hub for all internal components and external peripherals.',
-        content: `The **Motherboard** is the central printed circuit board that connects the CPU, memory, storage, and all other peripherals.
+        name: 'The Motherboard Hub', 
+        summary: 'Main parts, chipsets, form factors, and the central connection logic.',
+        content: `The motherboard is the **Mainboard** or **PCB** that connects all functional units.
 
-### Key Components
-- **CPU Socket**: Holds the processor. 
-- **Chipset**: Manages the flow of data. Traditionally split into **Northbridge** (RAM/Graphics) and **Southbridge** (USB/SATA/Audio). Modern CPUs often integrate these tasks.
-- **Expansion Slots**: **PCI Express (PCIe)** slots allow adding hardware like Graphics Cards ($x16$) or Network Cards ($x1$).
-- **BIOS/UEFI Chip**: Firmware that starts the computer, performs the **POST (Power-On Self-Test)**, and loads the kernel.
-- **CMOS Battery**: Powers the internal clock and retains BIOS settings.
-
-### I/O Communication Methods
-How the CPU talks to devices:
-1. **Programmed I/O (PIO)**: CPU constantly checks (polls) the device status. Very inefficient and CPU-intensive.
-2. **Interrupt-Driven I/O**: The device signals (interrupts) the CPU when it is ready. Better CPU utilization.
-3. **Direct Memory Access (DMA)**: A separate controller moves data directly between RAM and devices, bypassing the CPU. Best for high-speed bulk transfers (e.g., HDD/SSD to RAM).
+### Main Parts
+- **CPU Socket**: Physical slot to install the CPU (LGA, PGA).
+- **RAM Slots**: Physical channels for memory modules (DIMM).
+- **Chipset**: The data logic manager.
+  - **Northbridge**: Handles high-speed CPU/RAM/Graphics (integrated in modern CPUs).
+  - **Southbridge**: Handles slower I/O (USB, SATA, PCIe, BIOS).
+- **Storage Connectors**: **SATA** (Disk) and **M.2** (Fast NVMe SSD).
+- **Expansion Slots**: **PCIe x16** (GPU) and **PCIe x1** (Expansion cards).
+- **BIOS/UEFI Chip**: Stores startup firmware.
+- **CMOS Battery**: Powers the system clock and retains BIOS settings when off.
+- **I/O Ports**: External Rear I/O (USB, HDMI, Ethernet, Audio).
 
 ### Form Factors
-Motherboards come in standard sizes like **ATX** (full size), **Micro-ATX** (compact), and **Mini-ITX** (tiny), determining the case and expansion capabilities.`,
+1. **ATX**: Full size (Standard Desktop).
+2. **Micro-ATX**: Compact Desktop.
+3. **Mini-ITX**: Ultra-compact (Smallest standard).
+4. **E-ATX**: Extended (Server/High-end workstation).`,
         visual: {
           type: 'layers',
-          data: ['User Interaction', 'OS Kernel', 'Device Drivers', 'Hardware Control']
+          data: ['CPU / Northbridge', 'RAM / Memory Bus', 'Southbridge / I/O Controller', 'Peripherals / External Ports']
         },
         examFocus: [
-          'Difference between Parallel Bus and Serial Bus.',
-          'Motherboard components and form factors (ATX, ITX).',
-          'Boot process and Role of POST/BIOS.',
-          'Methods of I/O (Programmed, Interrupt, DMA).'
+          'Functions of the Northbridge and Southbridge.',
+          'Comparing ATX, Micro-ATX, and ITX sizes.',
+          'Role of the BIOS and CMOS Battery.'
         ],
         details: [
-          { title: 'System Buses', description: 'Address Bus (Where?), Data Bus (What?), and Control Bus (How?). Width determines bandwidth and addressable memory.' },
-          { title: 'Form Factors', description: 'Standard-ATX (305x244mm), Micro-ATX (244x244mm), Mini-ITX (170x170mm). Nano/Pico-ITX used for IoT/Automation.' },
-          { title: 'Firmware & BIOS', description: 'Firmware: Embedded software in ROM. BIOS/UEFI: Initializes hardware during POST (Power-On Self-Test) and loads the Bootloader.' },
-          { title: 'Methods of I/O', description: 'Programmed I/O (CPU polls), Interrupt-Driven I/O (Device signals CPU), DMA (Direct Memory Access - bypasses CPU for bulk transfer).' }
+          { title: 'Form Factor', description: 'Specifies the size, shape, and layout of the motherboard.' },
+          { title: 'Expansion Slot', description: 'Internal slots like PCIe that allow adding functionality via cards.' },
+          { title: 'Cooling Mounts', description: 'Dedicated brackets and headers for CPU fans or liquid cooling.' },
+          { title: 'Chipset', description: 'A group of integrated circuits that control communication between CPU and devices.' }
+        ]
+      },
+      { 
+        name: 'I/O Communication Methods', 
+        summary: 'Technical protocols for data exchange: PIO, Interrupts, and DMA.',
+        content: `How does a CPU actually talk to a device?
+
+### 1. Programmed I/O (PIO)
+The CPU is responsible for the entire transfer. It "polls" (checks) the device status repeatedly.
+- **Inefficient**: CPU is busy waiting.
+
+### 2. Interrupt-Driven I/O
+The device signals the CPU when it's ready by sending an **Interrupt**.
+- **Efficient**: CPU does other work until signaled. It then jumps to an **ISR (Interrupt Service Routine)**.
+
+### 3. Direct Memory Access (DMA)
+A separate **DMA Controller** handles bulky data transfers between Disk and RAM *without* involving the CPU.
+- **Best for performance**: CPU only sets up and is notified at completion.
+
+### 4. Memory-Mapped I/O (MMIO)
+Devices are assigned specific "memory addresses." Writing to address \`0xABCD\` might actually send data to the GPU instead of RAM.
+- **Simplified**: Uses the same instruction set for memory and I/O.`,
+        visual: {
+          type: 'stack',
+          data: ['PIO (Polling)', 'Interrupt Handling', 'DMA Transfer', 'MMIO Access']
+        },
+        examFocus: [
+          'Comparing PIO vs DMA performance.',
+          'The concept of an Interrupt Service Routine (ISR).',
+          'Relationship between I/O methods and CPU load.'
+        ],
+        details: [
+          { title: 'Polling', description: 'The process where the CPU constantly checks if a device is ready.' },
+          { title: 'DMA Controller', description: 'Hardware that handles bulk data transfers independently of the CPU.' },
+          { title: 'ISR', description: 'A specific set of code that runs in response to a hardware interrupt.' },
+          { title: 'Input Device', description: 'Keyboard, Mouse, Scanner, Microphone.' }
+        ]
+      },
+      { 
+        name: 'Device management & Interface Cards', 
+        summary: 'Operating system control logic and modular circuit expansions.',
+        content: `### Device Management
+The OS must manage diverse hardware types:
+- **Block Devices**: Handle data in fixed-size blocks (Disk, SSD). Random access.
+- **Character Devices**: Handle stream of bytes (Keyboard, Serial). Sequential.
+- **Network Devices**: Handle packet-based communication.
+
+**Functions:**
+- **Device Drivers**: Software bridge between OS and hardware.
+- **Device Controller**: The hardware logic on the device.
+- **Scheduling**: Managing the order of I/O requests.
+- **Buffering**: Storing data temporarily during transfer.
+
+### Interface Cards
+Modular expansion boards for specific functions:
+- **NIC (Network Interface Card)**: Wired/Wireless connectivity.
+- **Graphics Card (GPU)**: Parallel processing for visual data.
+- **Sound Card**: ADC/DAC processing for audio.
+- **Storage Controller**: RAID or specialized data handling.
+- **USB Expansion**: Adding extra Ports.
+- **Thunderbolt Card**: Ultra high-speed daisy-chained I/O.`,
+        visual: {
+          type: 'grid-disks',
+          data: { title: 'Expansion Ecosystem', layout: 'Wired NIC Card | Discrete GPU | HD Audio Card | Capture Card' }
+        },
+        examFocus: [
+          'Difference between Block and Character devices.',
+          'Role of Device Drivers in the system software stack.',
+          'Types of interface cards and their specific use cases.'
+        ],
+        details: [
+          { title: 'Device Driver', description: 'Software that translates general OS commands to device-specific code.' },
+          { title: 'Network Controller', description: 'Handles protocol logic for Ethernet, Wi-Fi, or Bluetooth.' },
+          { title: 'TV Tuner Card', description: 'Expansion card used to receive and display TV signals on a computer.' },
+          { title: 'Buffering', description: 'Mechanism to smooth out speed differences between devices and the CPU.' }
+        ]
+      },
+      { 
+        name: 'Computer Buses & Interconnections', 
+        summary: 'The highways of data: Types, architecture, and communication modes.',
+        content: `A **Bus** is a communication pathway shared by multiple components.
+
+### Types of Buses
+1. **Data Bus**: Carries actual data bits (Bidirectional). Width (bits) determines bandwidth.
+2. **Address Bus**: Carries the address location (Unidirectional). Width determines **Max Addressable Memory** ($2^N$).
+3. **Control Bus**: Carries timing and command signals (RD, WR, RESET).
+
+### Bus Architecture
+- **System Bus**: Connects CPU, Memory, and Chipset. High speed.
+- **Peripheral Bus**: Connects North/Southbridge to I/O slots (PCIe, USB).
+- **Expansion Bus**: Connects additional components (GPU, Network).
+
+### Communication Modes
+- **Parallel**: Multiple bits sent at once over multiple wires. High throughput but distance-limited (Crosstalk).
+- **Serial**: One bit sent after another over a single wire. Modern standard (SATA, USB, PCIe) due to higher clock speeds and signal integrity at distances.`,
+        visual: {
+          type: 'topologies',
+          data: ['Control Bus (Logic)', 'Address Bus (Where)', 'Data Bus (What)', 'Bus Master (Priority)']
+        },
+        examFocus: [
+          'Relationship between Address Bus width and RAM limit.',
+          'Serial vs Parallel communication advantages.',
+          'Structure of data, address, and control pathways.'
+        ],
+        details: [
+          { title: 'Bus Width', description: 'The number of bits a bus can transmit simultaneously (e.g., 64-bit).' },
+          { title: 'Bandwidth', description: 'The total data transfer rate, calculated as Width × Frequency.' },
+          { title: 'System Bus', description: 'The primary backbone bus connecting the CPU to the memory controller.' },
+          { title: 'Daisy Chaining', description: 'A wiring scheme where multiple devices are connected in sequence.' }
+        ]
+      },
+      { 
+        name: 'Firmware & The Boot Sequence', 
+        summary: 'System software in ROM and the sequence of loading the OS.',
+        content: `### Firmware
+The low-level software permanently embedded in a hardware device.
+- **Storage**: ROM, EPROM, or Flash.
+- **Purpose**: Bridge between Hardware and the OS.
+
+| Category | Software | Firmware |
+| :--- | :--- | :--- |
+| **Scope** | Broad application tasks (Apps/Games) | Specific to hardware control |
+| **Persistence** | Stored on disk, loaded to RAM | Embedded in hardware chips |
+| **Interaction** | direct user interaction | Limited / Background only |
+| **Updatability** | Frequent (Weekly) | Rare / Critical risk |
+
+### The Boot Process
+The sequence when you press power:
+1. **POST (Power-On Self-Test)**: Check CPU, RAM, and essential chips.
+2. **BIOS/UEFI Activation**: Firmware loads basic hardware settings.
+3. **Locate Bootloader**: Search disk/USB for the **Master Boot Record (MBR)**.
+4. **Bootloader Execution**: Runs code like **GRUB** or **Windows Boot Manager**.
+5. **Kernel Loading**: The core of the OS is loaded from Disk to RAM.
+6. **Init System**: Launches user services and the Login screen.
+
+**Types of Booting:**
+- **Cold Boot**: From a completely OFF state.
+- **Warm Boot**: Restarting when the system is already ON (Reset).`,
+        visual: {
+          type: 'flow',
+          data: ['Power On', 'POST', 'BIOS/UEFI', 'Bootloader', 'OS Kernel']
+        },
+        examFocus: [
+          'Software vs Firmware comparison table.',
+          'Steps of the Boot Cycle (POST, BIOS, Kernel).',
+          'Difference between BIOS and UEFI.'
+        ],
+        details: [
+          { title: 'UEFI', description: 'Unified Extensible Firmware Interface. Modern replacement for the legacy BIOS.' },
+          { title: 'Embedded System', description: 'A purpose-built computer inside another device (e.g., washink machine firmware).' },
+          { title: 'System Initialization', description: 'Setting initial hardware states and preparing the logic for the OS.' },
+          { title: 'Kernel', description: 'The central core of an operating system with complete control over everything.' }
         ]
       }
     ]
@@ -390,6 +617,38 @@ The web works on the **Client-Server model**.
           { title: 'VPN Channels', description: 'Uses encryption and IP masking to create a secure path over an insecure network.' },
           { title: 'Web Servers', description: 'Software like Apache or Nginx that listens for HTTP requests and serves site files.' }
         ]
+      },
+      {
+        name: 'The Linux Command Line',
+        summary: 'Essential shell commands for system interaction and automation.',
+        content: `Interacting with Unix-like systems (Linux, macOS) often requires the **CLI (Command Line Interface)**.
+
+### Basic Linux Commands
+- **mkdir [dir_name]**: Create a new directory.
+- **ls**: List all files and subfolders in the current directory.
+- **cp [source] [dest]**: Copy file contents or move data.
+- **chmod [permissions] [file]**: Change access permissions (Read/Write/Execute).
+- **cat [file]**: Display the contents of a text file.
+
+### Shell Scripting
+A shell script is a file containing a series of commands. The shell (like **Bash**) reads this file and executes the commands in sequence.
+\`\`\`bash
+#!/bin/bash
+echo "Initializing System Statistics..."
+uptime
+free -m
+\`\`\``,
+        examFocus: [
+          'Core Linux commands for file management.',
+          'Understanding file permissions (chmod).',
+          'Basics of Shell scripting automation.'
+        ],
+        details: [
+          { title: 'Directory Control', description: 'mkdir builds folders; ls reveals content; cd changes location.' },
+          { title: 'Data Manipulation', description: 'cp copies; mv moves/renames; rm deletes.' },
+          { title: 'Permissions', description: 'chmod handles who can view or run files using numeric (777) or symbolic (u+x) codes.' },
+          { title: 'Automation', description: 'Bash scripts allow executing complex workflows with a single trigger.' }
+        ]
       }
     ]
   },
@@ -434,20 +693,47 @@ The web works on the **Client-Server model**.
         summary: 'Using markup tags to define meaning and hierarchy in web documents.',
         content: `**HTML (HyperText Markup Language)** defines the structure and meaning of web content.
 
-### Core Markup Concepts
-- **Tags**: Keywords in angle brackets (\`<html>, <body>\`). Most come in pairs (start/end).
-- **Attributes**: Provide metadata for tags (\`src, href, id, class\`).
-- **Semantics**: Tags that describe their content. Use \`<header>, <main>, <nav>, <article>\` instead of generic \`<div>\` tags to help screen readers and search engines.
+### Basic Syntax
+\`\`\`html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <h1>Main Heading</h1>
+    <p>This is a paragraph.</p>
+    <a href="https://google.com">A Link</a>
+  </body>
+</html>
+\`\`\`
 
-### Advanced Elements
-- **Tables**: Built with \`<table>, <tr>, <th>, <td>\`. Use **colspan** to span columns and **rowspan** for rows.
-- **Forms**: Gather user input (\`<input>, <label>, <select>\`). Uses **GET** (visible URL data) or **POST** (hidden body data) methods.
+### Common Tags
+- **Headings**: \`<h1>\` to \`<h6>\` (h1 is largest).
+- **Lists**: \`<ul>\` (unordered/bullets), \`<ol>\` (ordered/numbered).
+- **Media**: \`<img src="image.jpg" alt="description">\`.
 
-### HTML vs XHTML
-**XHTML** is a stricter, XML-compliant version. 
-- All tags must be closed.
-- Elements must be in lowercase.
-- Attribute values must be quoted.`,
+### Tables & Forms
+Tables organize research:
+\`\`\`html
+<table border="1">
+  <tr>
+    <th colspan="2">Student Data</th>
+  </tr>
+  <tr>
+    <td>ID</td>
+    <td>Name</td>
+  </tr>
+</table>
+\`\`\`
+
+### Forms gather input:
+\`\`\`html
+<form action="/submit" method="POST">
+  <input type="text" name="name" placeholder="Name">
+  <input type="submit" value="Register">
+</form>
+\`\`\``,
         visual: {
           type: 'layers',
           data: ['Document Head', 'Navigation', 'Main Section', 'Nested Elements', 'Footer']
@@ -469,23 +755,34 @@ The web works on the **Client-Server model**.
         summary: 'The aesthetic rules governing layout, spacing, and responsive design.',
         content: `**CSS (Cascading Style Sheets)** is the language for presentation.
 
-### The CSS Box Model
-Every element is a box. Understanding this is key to layout:
+### Syntax
+\`\`\`css
+selector {
+  property: value;
+}
+
+h1 {
+  color: navy;
+  font-size: 24px;
+}
+\`\`\`
+
+### The Box Model
+Every element is a box consisting of:
 1. **Margin**: Space outside the border.
-2. **Border**: The edge.
-3. **Padding**: Space between the border and content.
-4. **Content**: The core bits like text or images.
-Use \`box-sizing: border-box\` to ensure padding doesn't increase the total width.
+2. **Border**: The edge of the box.
+3. **Padding**: Space between border and content.
+4. **Content**: Text or images.
 
-### Modern Layouts
-- **Flexbox (1D)**: Best for rows or columns.
-- **CSS Grid (2D)**: Best for complex layouts with both rows and columns.
-- **Responsive Design**: Uses **Media Queries** (\`@media\`) to change styles based on the device screen size.
-
-### CSS Methods
-- **Inline**: Inside the tag (\`style="..."\`). Inefficient.
-- **Internal**: Inside \`<style>\` tags in the head.
-- **External**: In a separate \`.css\` file (Recommended).`,
+### Layout Strategies
+- **Flexbox (1D)**: \`display: flex; justify-content: center;\`.
+- **CSS Grid (2D)**: \`display: grid; grid-template-columns: 1fr 1fr;\`.
+- **Responsive**: 
+\`\`\`css
+@media (max-width: 600px) {
+  body { background-color: lightgrey; }
+}
+\`\`\``,
         visual: {
           type: 'box-model',
           data: {}
@@ -507,23 +804,32 @@ Use \`box-sizing: border-box\` to ensure padding doesn't increase the total widt
         summary: 'Programming logic that makes static pages interactive and dynamic.',
         content: `**JavaScript** is the behavior layer of the web.
 
-### Core Language
-- **Variables**: \`let\` (mutable) and \`const\` (immutable).
-- **Logics**: \`if-else\` statements for branching and loops (\`for, while\`) for repetition.
+### Language Basics
+\`\`\`javascript
+const now = new Date();
+let message = "Hello, System!";
 
-### DOM Manipulation
-The **Document Object Model (DOM)** is a tree of HTML elements that JS can modify.
-- **Select**: \`document.getElementById()\` captures an element.
-- **Modify**: \`element.innerText = "New Text"\`.
-- **Style**: \`element.style.color = "red"\`.
+if (confirm("Show status?")) {
+  alert("Current Date/Time: " + now.toLocaleString());
+}
+\`\`\`
 
-### Event Listeners
-JavaScript reacts to user actions via **Event Listeners**:
-- \`click\`: Button presses.
-- \`mouseover\`: Hovering.
-- \`submit\`: Form processing.
+### DOM Interaction
+Select elements and change them on the fly:
+\`\`\`javascript
+const button = document.getElementById("trigger");
+const output = document.querySelector(".result");
 
-Interactivity enables features like pop-up alerts, dynamic search, data validation, and real-time updates without page reloads.`,
+button.addEventListener("click", () => {
+  output.innerText = "Interactivity Active!";
+  output.style.color = "gold";
+});
+\`\`\`
+
+### Key Features
+- **Interactivity**: Buttons, forms, and pop-ups.
+- **Dynamic Content**: Updating data without page reloads.
+- **Validation**: Checking user inputs before sending to server.`,
         visual: {
           type: 'flow',
           data: ['User Event', 'Event Captured', 'JS Logic Processed', 'DOM UI Updated']
