@@ -46,7 +46,7 @@ export default function Page() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center max-w-2xl"
       >
-        <h1 className="text-4xl md:text-8xl font-black italic tracking-tighter text-th-text mb-4 uppercase leading-[0.8] underline decoration-th-accent decoration-8 underline-offset-8">
+        <h1 className="text-4xl md:text-8xl font-black italic tracking-tighter text-th-text mb-4 uppercase leading-[0.8] underline decoration-th-accent decoration-8 underline-offset-4 pb-2">
           FOCFHWTWD
         </h1>
         <p className="text-lg text-th-text-secondary font-black font-mono border-y-2 border-th-border/10 py-6 mb-16 uppercase tracking-[0.2em] bg-th-bg-secondary/50">
@@ -102,8 +102,8 @@ export default function Page() {
       </div>
 
       {/* Footer */}
-      <footer className="mt-24 w-full max-w-4xl border-t-4 border-th-border pt-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
+      <footer className="mt-24 w-full max-w-4xl border-t-4 border-th-border pt-16 pb-40 md:pb-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start md:items-end">
           <div className="space-y-6">
             <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-th-text-secondary font-black">Secure Communications</h3>
             <a 
@@ -114,9 +114,10 @@ export default function Page() {
               Initialize Contact
             </a>
           </div>
-          <div className="text-right space-y-2 font-mono text-[10px] md:text-xs text-th-text-secondary uppercase tracking-widest leading-loose">
-            <p>&copy; 2026 HexnicAI || Protocol ATS_PDZ</p>
-            <p className="opacity-50">NODE: SINCE 2023 | ATS-PDZ</p>
+          <div className="text-left md:text-right space-y-2 font-mono text-[10px] md:text-xs text-th-text-secondary uppercase tracking-widest leading-loose">
+            <p>Created by Aaron Thalakkottor Sooraj</p>
+            <p>A part of HexnicAI | A part of ATS_PDZ</p>
+            <p>&copy; 2026 ATS-PDZ</p>
             <p className="font-black text-th-text bg-th-text-secondary/10 px-2 inline-block">SECURED ACCESS ONLY</p>
           </div>
         </div>

@@ -427,227 +427,497 @@ The sequence when you press power:
   },
   {
     id: 2,
-    title: 'Foundations of Computing',
+    title: 'Data Representation & CPU Architecture',
     icon: Binary,
     topics: [
-      { 
-        name: 'Number Systems & Representations', 
-        summary: 'How computers store integers and symbols using binary logic and complementary systems.',
-        content: `Computers represent all data (numbers, text, images) as binary digits (**bits**).
+      {
+        name: 'Data Storage Units',
+        summary: 'Standardized measurements used to quantify digital information.',
+        content: `### Bits and Bytes
+- **Bit**: A binary digit (0 or 1). The smallest unit of data.
+- **Byte**: A collection of 8 bits. It's the standard unit of storage (e.g., storing one character of text).
 
-### Number Systems
-- **Binary (Base-2)**: Digits 0, 1.
-- **Octal (Base-8)**: Digits 0-7. Used as a shorthand for 3-bit binary groups.
-- **Hexadecimal (Base-16)**: Digits 0-9 and A-F. Shorthand for 4-bit groups.
+### Larger Units
+Data grows exponentially using powers of 2.
+- **Kilobyte (KB)**: $1,024$ bytes ($2^{10}$). Small text files.
+- **Megabyte (MB)**: $1,024$ KB. High-resolution photos.
+- **Gigabyte (GB)**: $1,024$ MB. HD movies.
+- **Terabyte (TB)**: $1,024$ GB. Hard drives and SSDs.
+- **Petabyte (PB)**: $1,024$ TB. Cloud data centers.
+*(Followed by Exabyte, Zettabyte, and Yottabyte).*
 
-### Integer Representation
-- **Unsigned**: Magnitude only, represents positive numbers.
-- **Signed**: To represent negative numbers, we use:
-    1. **Sign-Magnitude**: Leftmost bit is the sign (0:+, 1:-). Inefficient due to "Double Zero."
-    2. **1\'s Complement**: Flipped bits.
-    3. **2\'s Complement**: Flip bits and add 1. This is the industry standard because it allows subtraction via addition ($A - B = A + \text{negate}(B)$) and has a unique zero.
-
-### Character Encoding
-- **ASCII**: 7-bit standard for English characters ($128$ codes).
-- **Unicode**: Modern global standard ($16/32$-bit). **UTF-16** can represent over a million symbols, supporting diverse languages and symbols like emojis. It is a superset of ASCII.`,
+**Why 1,024?** Computers use binary (base 2). While the decimal prefix "kilo" means 1,000, in computing $1\\text{ KB} = 2^{10} = 1,024$ bytes.`,
         visual: {
           type: 'none',
           data: null
         },
         examFocus: [
-          'Calculations for 2\'s complement negation.',
-          'Range of values for N-bit signed vs unsigned integers.',
-          'Differences between ASCII and Unicode (UTF-16).',
-          'Concept of BCD and why it is used.'
+          'Relationship between bits, bytes, and kilobytes.',
+          'Why computer storage uses powers of 2 (1,024 instead of 1,000).',
+          'Hierarchy of units up to Yottabyte.'
         ],
         details: [
-          { title: 'Calculating 2\'s Complement', description: 'Step 1: Write positive binary. Step 2: Invert all bits (0↔1). Step 3: Add 1 to the result.' },
-          { title: 'The Double Zero Problem', description: 'Sign-Magnitude leads to two encodings for zero, complicating logic. 2\'s complement solves this.' },
-          { title: 'Data Units', description: 'Bit (0/1), Byte (8 bits), Word (32/64 bits depending on architecture).' },
-          { title: 'Unicode Popularity', description: 'UTF-16 is common in system internals, while UTF-8 is the standard for web content.' }
+          { title: 'Bit', description: 'Short for binary digit. Basic building block representing a 1 or a 0.' },
+          { title: 'Base-2 Mathematics', description: 'Computing relies on binary, leading to the use of $1024$ ($2^{10}$) for metric steps.' }
         ]
       },
-      { 
-        name: 'Instruction Set & CPU Architecture', 
-        summary: 'The interface between software and hardware, and the stages of instruction execution.',
-        content: `An **Instruction Set Architecture (ISA)** is the set of basic commands a CPU understands.
+      {
+        name: 'Number Systems',
+        summary: 'The structured methods of representing numerical values using different bases.',
+        content: `A number system is defined by its **base (radix)**, which dictates the number of unique digits.
 
-### Components of an Instruction
-1. **Opcode (Operation Code)**: Tells the CPU what to do (e.g., ADD, SUB, MOV).
-2. **Operands**: Tells where the data is or provide raw values.
-3. **Addressing Mode**: Defines how operands are accessed (Immediate, Register, Direct, Indirect, Indexed).
+### Common Bases
+1. **Decimal (Base 10)**: Digits 0-9. Used by humans.
+2. **Binary (Base 2)**: Digits 0, 1. Used internally by computing circuits (ON/OFF).
+3. **Octal (Base 8)**: Digits 0-7. Useful as a compact representation since 1 octal digit = 3 binary bits.
+4. **Hexadecimal (Base 16)**: Digits 0-9 and A-F (where A=10, F=15). Widely used in memory addressing because 1 hex digit neatly represents 4 binary bits.
 
-### ISA Philosophies
-- **CISC (Complex Instruction Set Computing)**: Large, complex instruction set. High execution complexity but shorter program code (e.g., Intel x86).
-- **RISC (Reduced Instruction Set Computing)**: Minimal, simple instructions. Faster execution per cycle but longer program code (e.g., ARM, used in smartphones).
-
-### The Instruction Cycle (Fetch-Decode-Execute)
-Every command goes through these steps:
-1. **Fetch**: The PC sends the address to the MAR. RAM sends the instruction to the IR. PC increments.
-2. **Decode**: The Control Unit interprets the bits in the IR.
-3. **Execute**: The ALU performs the operation using data from registers.
-4. **Store**: Results are written back to a register or RAM.`,
+### The Conversion Principle
+Any number can be converted between bases. For example, to convert to binary, repeatedly divide the decimal number by 2 and read remainders in reverse.`,
         visual: {
-          type: 'stack',
-          data: ['Opcode (Operation)', 'Operand 1 (Source)', 'Operand 2 (Destination)', 'Condition Flags']
+          type: 'none',
+          data: null
         },
         examFocus: [
-          'Differences between CISC and RISC architectures.',
-          'Types of addressing modes and their technical usage.',
-          'Structure of an instruction: Opcode vs Operands.',
-          'The exact sequence of the Fetch-Decode-Execute cycle.'
+          'The concept of Base (Radix).',
+          'Why Hexadecimal is used in memory addressing.',
+          'Value representation of hex characters A-F.'
         ],
         details: [
-          { title: 'Opcode', description: 'The unique binary code that identifies a specific operation like Addition or Jump.' },
-          { title: 'Immediate Addressing', description: 'The fastest mode because the data is hard-coded into the instruction itself.' },
-          { title: 'CISC vs RISC', description: 'CISC targets code density; RISC targets execution speed and power efficiency.' },
-          { title: 'Fetch Phase', description: 'The Program Counter (PC) provides the location; RAM provides the data; Instruction Register (IR) holds it.' }
+          { title: 'Radix', description: 'The number of unique digits, including zero, used in a number system.' },
+          { title: 'Shorthand', description: 'Hexadecimal provides a crucial human-readable shorthand for long binary strings.' }
+        ]
+      },
+      {
+        name: 'Number Representations',
+        summary: 'How integers, characters, and media are translated into binary combinations.',
+        content: `### Storing Integers
+A single integer is stored across memory locations. An 8-bit location stores values from 0-255. A 32-bit location stores over 4 billion values.
+- **Binary-Coded Decimal (BCD)**: Each decimal digit is individually converted to a 4-bit binary sequence. Much less efficient for storage compared to standard binary.
+
+### Signed Integers
+Representing negative numbers requires sacrificing a bit for the sign.
+1. **Sign and Magnitude**: Leftmost bit is the sign (0 is +, 1 is -). Presents difficulties due to a "double zero" (+0 and -0).
+2. **1's Complement**: Invert all bits (0s to 1s). Still has double zero.
+3. **2's Complement**: Invert all bits and add 1. This is the industry standard because it eliminates double zero and simplifies subtraction via addition circuits.
+
+### 9's Complement (Decimal)
+Used in digital subtraction. Find the 9's complement of B (subtract each digit from 9), add it to A, and adjust any carry.`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Differences between 1\'s and 2\'s complement.',
+          'The "double zero" problem of sign-magnitude representation.',
+          'Calculation of 9\'s complement in decimal subtraction.'
+        ],
+        details: [
+          { title: 'Binary-Coded Decimal', description: 'Storing "68" as the independent 4-bit sequences for 6 and 8. Inefficient for calculation.' },
+          { title: '2\'s Complement', description: 'The mathematical standard allowing CPUs to perform subtraction purely with addition logic.' }
+        ]
+      },
+      {
+        name: 'Alphanumeric Character Data',
+        summary: 'Standardized encoding schemes that translate text into binary strings.',
+        content: `To process text, every letter, number, and punctuation mark (alphanumeric data) must be translated into binary. 
+
+### Encoding Standards
+1. **ASCII (American Standard Code for Information Interchange)**: Originally a 7-bit code providing 128 characters (English letters, digits, control codes). Later extended to 8-bit (Latin-1) for 256 characters.
+2. **EBCDIC**: An older 8-bit standard developed by IBM, mostly restricted to mainframes.
+3. **Unicode**: The modern universal standard. While ASCII is limited, Unicode supports over a million characters using 8-bit, 16-bit (UTF-16), or 32-bit words. It supports almost every global alphabet, ideographs (Chinese, Japanese), and emojis. 
+
+*ASCII is actually a subset of Unicode, meaning conversion is simply padding the 8-bit ASCII value with zeroes to reach 16 bits.*`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'The limitations of ASCII and EBCDIC.',
+          'Why Unicode is the modern standard for global text.',
+          'Understanding that text must be entered and stored digit-by-digit.'
+        ],
+        details: [
+          { title: 'ASCII', description: 'Pronounced "as-key". The foundational encoding for English text on the early web.' },
+          { title: 'Unicode', description: 'The comprehensive global standard replacing ASCII to support all languages.' }
+        ]
+      },
+      {
+        name: 'CPU Architecture & Components',
+        summary: 'The main structural units of the brain of the computer.',
+        content: `The **Central Processing Unit (CPU)** executes instructions using three primary structural units:
+
+1. **Arithmetic Logic Unit (ALU)**: The computational core. Performs math (addition, multiplication) and logic (AND, XOR) operations. It relies on internal logic gates and updates **Status Flags** (Zero, Carry, Sign, Overflow) based on calculation results.
+2. **Control Unit (CU)**: The manager. Retrieves instructions, interprets them, and generates control signals to move data via the system bus.
+   - **Hardwired**: Fixed logic circuits (Fast, RISC).
+   - **Microprogrammed**: Stored microinstructions (Flexible, CISC).
+3. **Registers**: Tiny, ultra-fast storage inside the CPU. 
+   - *General Purpose*: Used for temporary execution data.
+   - *Special Purpose*: **PC** (Program Counter), **IR** (Instruction Register), **MAR** (Memory Address), **MDR** (Memory Data).
+
+The **System Bus** links everything together, consisting of the explicit Data Bus, Address Bus, and Control Bus.`,
+        visual: {
+          type: 'flow',
+          data: ['Control Unit', 'ALU', 'Registers', 'System Bus']
+        },
+        examFocus: [
+          'Differentiate between ALU and Control Unit responsibilities.',
+          'Functions of specialized registers like PC, IR, MAR, and MDR.',
+          'Hardwired vs Microprogrammed Control Units.'
+        ],
+        details: [
+          { title: 'ALU Status Flags', description: 'Single bits updated after an ALU operation stating if the result was Zero, Negative, or carried over.' },
+          { title: 'Program Counter (PC)', description: 'Tracks the exact memory address of the next instruction waiting to be executed.' }
+        ]
+      },
+      {
+        name: 'The Instruction Cycle',
+        summary: 'The fundamental sequence of steps followed by the CPU to execute instructions.',
+        content: `The CPU processes instructions in a continuous loop called the **Fetch-Decode-Execute Cycle**.
+
+### The 4 Stages
+1. **Fetch**: 
+   - The Program Counter (PC) sends the next instruction's address to the MAR.
+   - The instruction is retrieved from memory and placed into the Instruction Register (IR).
+   - The PC increments.
+2. **Decode**: 
+   - The Control Unit interprets the IR contents, identifying the Opcode and Operands.
+3. **Execute**: 
+   - The ALU executes arithmetic, or data is moved through registers.
+4. **Store (Write-back)**: 
+   - The computed result is written back to the Accumulator, a register, or main memory.`,
+        visual: {
+          type: 'flow',
+          data: ['Fetch (from RAM)', 'Decode (by CU)', 'Execute (by ALU)', 'Store (to Register/RAM)']
+        },
+        examFocus: [
+          'Detailed step-by-step breakdown of the Fetch cycle.',
+          'The specific data flow between PC, MAR, and IR during fetching.',
+          'The outcome of the Decode phase.'
+        ],
+        details: [
+          { title: 'Fetch Phase', description: 'Primarily a memory retrieval operation initiated by the Program Counter.' },
+          { title: 'Execution Phase', description: 'The actual processing of the data, primarily utilizing the ALU and Control Signals.' }
+        ]
+      },
+      {
+        name: 'Instruction Sets & Addressing Modes',
+        summary: 'How software speaks to hardware through defined operational codes.',
+        content: `An **Instruction Set Architecture (ISA)** is the interface connecting software to CPU hardware.
+
+### Instruction Components
+- **Opcode**: What to do (e.g., ADD, MOV).
+- **Operands**: The data to manipulate.
+- **Addressing Mode**: How to locate the operands.
+  - *Immediate*: Value is hardcoded in the instruction (\`MOV R1, 5\`).
+  - *Register*: Data is inside a processor register.
+  - *Direct*: Exact memory address is specified.
+  - *Indirect*: A register points to a memory address.
+  - *Indexed*: Calculated using a base address plus an offset.
+
+### Architectural Philosophies
+- **CISC**: Complex Instruction Set Computing (x86). Large sets, complex multi-step operations in single lines.
+- **RISC**: Reduced Instruction Set Computing (ARM). Small sets, highly optimized, faster per-cycle execution.
+
+### Instruction Format Types
+Instructions vary by operand count: from **Zero-Address** (stack operations) up to **Three-Address** (source1, source2, destination).`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Contrast CISC vs RISC architectures.',
+          'Define the 5 main addressing modes (Immediate, Register, Direct, Indirect, Indexed).',
+          'Components of an instruction: Opcode vs Operand.'
+        ],
+        details: [
+          { title: 'Opcode', description: 'The binary code specifying the mathematical or logical operation.' },
+          { title: 'Addressing Mode', description: 'The protocol defining how the Instruction interprets its operand values.' }
+        ]
+      },
+      {
+        name: 'Assembly Language',
+        summary: 'Low-level human-readable code that directly drives CPU instructions.',
+        content: `**Assembly Language** uses readable mnemonics (like ADD, MOV, SUB) instead of raw binary machine code.
+
+- **Assembler**: The tool required to translate Assembly mnemonics into executable binary.
+
+### Features
+- Provides absolute, direct control over memory and CPU registers.
+- Extremely fast execution due to lack of software overhead.
+- Highly machine-dependent (code written for ARM will not run on Intel).
+
+### Basic Instruction Categories
+1. **Data Transfer**: \`MOV\`, \`LOAD\`, \`STORE\`, \`PUSH\`
+2. **Arithmetic**: \`ADD\`, \`SUB\`, \`INC\`
+3. **Logical**: \`AND\`, \`OR\`, \`XOR\`
+4. **Control Transfer (Branching)**: \`JMP\` (Jump), \`JE\` (Jump if Equal)
+
+*Example*: Reading memory to a register, adding value, and storing it back is a fundamental layout of Assembly logic.`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Advantages (speed, direct control) and Disadvantages (hard to learn, not portable) of Assembly.',
+          'Recognizing core mnemonics like MOV, JMP, and LOAD.',
+          'Need for an Assembler.'
+        ],
+        details: [
+          { title: 'Mnemonic', description: 'A short text code representing a CPU operation, acting as a mental aid.' },
+          { title: 'Portability', description: 'Assembly is fundamentally non-portable because it is tied directly to a specific custom ISA.' }
         ]
       }
     ]
   },
   {
     id: 3,
-    title: 'Software & Networks',
+    title: 'Computer Networks & Internet',
     icon: Globe,
     topics: [
-      { 
-        name: 'Operating System Services', 
-        summary: 'The system software that manages hardware and provides services for applications.',
-        content: `The **Operating System (OS)** acts as a mediator between the user/applications and the computer hardware.
+      {
+        name: 'Introduction to Computer Networks',
+        summary: 'The foundations of connecting devices for resource sharing and communication.',
+        content: `A **Computer Network** is a set of devices (nodes) connected by communication links. 
 
-### Core OS Services
-- **Process Management**: Handles the creation, scheduling, and termination of programs in execution. It uses techniques like **Time-Slicing** for multitasking.
-- **Memory Management**: Allocates RAM to processes and ensures a process doesn't overwrite another\'s data. It also manages **Virtual Memory**.
-- **File System**: Abstraction of physical storage into directories and files. Manages permissions (Read/Write/Execute).
-- **Device Management**: Uses **Device Drivers** to communicate with unique hardware.
-- **User Interface**: Provides a way for users to interact, either via **GUI** (Graphical) or **CLI** (Command Line/Terminal).
+### Why Network?
+- **Resource Sharing**: Printers, storage.
+- **Data Exchange**: Emails, file transfers.
+- **Cost Reduction**: Share a single internet connection or centralized server.
+- **Reliability**: Alternative sources of data if one node fails.
 
-### Processing Models
-- **Interactive**: Real-time human interaction (e.g., PC).
-- **Batch Processing**: Running jobs in groups without manual intervention (e.g., payroll).
-- **Real-Time (RTOS)**: Used in mission-critical hardware (e.g., medical devices) where timing is absolute.`,
-        visual: {
-          type: 'layers',
-          data: ['Application Layer', 'Operating System', 'Kernel', 'Firmware', 'Hardware']
-        },
-        examFocus: [
-          'Difference between System Software and Application Software.',
-          'Core OS services: Memory management, CPU scheduling, I/O control.',
-          'Interactive vs Batch processing models.'
-        ],
-        details: [
-          { title: 'Process Management', description: 'Handles the creation, scheduling, and termination of processes. Ensures CPU time is shared fairly.' },
-          { title: 'Memory Management', description: 'Coordinates RAM allocation and manages virtual memory using paging and frames.' },
-          { title: 'File System Control', description: 'Structures data storage into directories and files. Manages permissions (Read/Write/Execute).' },
-          { title: 'Device Management', description: 'Acts as an intermediary between OS and hardware using Device Drivers.' }
-        ]
-      },
-      { 
-        name: 'Networks & Topologies', 
-        summary: 'How nodes connect and communicate across different scales and layouts.',
-        content: `Computing networks allow devices to share data and resources efficiently.
-
-### Scaling Categorization
-- **PAN (Personal Area Network)**: Smallest, for one person (e.g., Bluetooth).
-- **LAN (Local Area Network)**: Single room or building.
-- **MAN (Metropolitan Area Network)**: City-wide.
-- **WAN (Wide Area Network)**: Global coverage (The Internet).
-
-### Physical Topologies
-- **Star**: Most common. All nodes connect to a central hub/switch. Easy to manage, hub failure is critical.
-- **Mesh**: Every node connects to many others. Highly resilient but expensive.
-- **Bus**: All nodes share one cable. Simple but vulnerable and slow.
-- **Ring**: Circular data flow.
-
-### Communication Modes
-- **Simplex**: One-way (TV).
-- **Half-Duplex**: Two-way, non-simultaneous (Walkie-talkies).
-- **Full-Duplex**: Simultaneous two-way (Phones).`,
+### Connection Types
+- **Point-to-Point**: A dedicated link between two specific devices.
+- **Multipoint**: Several devices share a single link.`,
         visual: {
           type: 'topologies',
-          data: ['Bus (Line)', 'Star (Hub)', 'Ring (Circle)', 'Mesh (All-to-All)']
+          data: ['Point-to-Point', 'Multipoint / Broadcast']
         },
         examFocus: [
-          'Suitability of Client-Server vs Peer-to-Peer networks.',
-          'Network topologies comparison (Mesh reliability vs Star management).',
-          'Scale categorization: LAN, MAN, WAN, PAN.'
+          'Advantages of networking.',
+          'Differences between Point-to-Point and Multipoint connections.'
         ],
         details: [
-          { title: 'Packet Switching', description: 'Large messages are divided into packets with headers (addressing) and trailers (error checking).' },
-          { title: 'Communication Channels', description: 'Simplex (One-Way), Half-Duplex (Two-way non-simultaneous), and Full-Duplex (Simultaneous interaction).' },
-          { title: 'LAN vs WAN', description: 'Local (Fast, cheap, private) vs Wide (Global, ISP driven, public).' },
-          { title: 'Star Topology', description: 'The standard for modern Ethernet networks due to ease of isolation and central control.' }
-        ]
-      },
-      { 
-        name: 'The Internet Architecture', 
-        summary: 'Standardized protocols enabling global connectivity and security.',
-        content: `The Internet is a massive network of networks using the **TCP/IP** protocol suite.
-
-### Addressing & Infrastructure
-- **IP Address**: Unique logical identifier. **IPv4** (32-bit) is old; **IPv6** (128-bit) provides massive address space.
-- **DNS (Domain Name System)**: Translates names (google.com) to IPs.
-- **DHCP**: Automatically assigns IPs to devices.
-- **NAT**: Allows multiple devices in a home or office to share a single public IP.
-
-### Network Security
-- **Firewalls**: Filter incoming/outgoing traffic based on rules.
-- **VPN (Virtual Private Network)**: Creates an encrypted tunnel over the public internet to hide your IP and secure data.
-- **IDS/IPS**: Monitors for intrusion patterns.
-
-### Web-Based Computing
-The web works on the **Client-Server model**. 
-- The Client (Browser) makes a request. 
-- The Web Server (Nginx, Apache) processes it. 
-- **CDNs (Content Delivery Networks)** cache files closer to the user to speed up the process.`,
-        visual: {
-          type: 'stack',
-          data: ['HTTP / Web Browsing', 'TCP / Data Integrity', 'IP / Packet Routing', 'Ethernet / Physical Media']
-        },
-        examFocus: [
-          'IPv4 (32-bit decimal) vs IPv6 (128-bit hex).',
-          'Mechanism of NAT and DHCP.',
-          'DNS resolution process.',
-          'Client-Server vs Tiered architecture.'
-        ],
-        details: [
-          { title: 'DNS Resolution', description: 'Converts human-readable names to IP addresses via a distributed database.' },
-          { title: 'NAT Protocol', description: 'Network Address Translation. Allows a whole private network to share a single public IP address.' },
-          { title: 'VPN Channels', description: 'Uses encryption and IP masking to create a secure path over an insecure network.' },
-          { title: 'Web Servers', description: 'Software like Apache or Nginx that listens for HTTP requests and serves site files.' }
+          { title: 'Node', description: 'Any device capable of sending/receiving data on a network.' },
+          { title: 'Link', description: 'The physical or logical communication pathway.' }
         ]
       },
       {
-        name: 'The Linux Command Line',
-        summary: 'Essential shell commands for system interaction and automation.',
-        content: `Interacting with Unix-like systems (Linux, macOS) often requires the **CLI (Command Line Interface)**.
-
-### Basic Linux Commands
-- **mkdir [dir_name]**: Create a new directory.
-- **ls**: List all files and subfolders in the current directory.
-- **cp [source] [dest]**: Copy file contents or move data.
-- **chmod [permissions] [file]**: Change access permissions (Read/Write/Execute).
-- **cat [file]**: Display the contents of a text file.
-
-### Shell Scripting
-A shell script is a file containing a series of commands. The shell (like **Bash**) reads this file and executes the commands in sequence.
-\`\`\`bash
-#!/bin/bash
-echo "Initializing System Statistics..."
-uptime
-free -m
-\`\`\``,
+        name: 'Network Topologies',
+        summary: 'The geometric arrangement of nodes and links in a network.',
+        content: `### Topologies
+1. **Star**: All nodes connect to a central hub/switch. Very common. Hub failure brings down the network.
+2. **Bus**: All nodes share one backbone cable. Cheap, but any cable break stops the network.
+3. **Ring**: Nodes are connected in a closed loop. Signal passes in one direction.
+4. **Mesh**: Every node connects to every other node. Extremely reliable but very expensive.
+5. **Tree**: A hierarchical structure combining Star and Bus characteristics.`,
+        visual: {
+          type: 'topologies',
+          data: ['Star', 'Bus', 'Ring', 'Mesh']
+        },
         examFocus: [
-          'Core Linux commands for file management.',
-          'Understanding file permissions (chmod).',
-          'Basics of Shell scripting automation.'
+          'Comparing Mesh vs Star topology.',
+          'Understanding the vulnerability of Bus topology.'
         ],
         details: [
-          { title: 'Directory Control', description: 'mkdir builds folders; ls reveals content; cd changes location.' },
-          { title: 'Data Manipulation', description: 'cp copies; mv moves/renames; rm deletes.' },
-          { title: 'Permissions', description: 'chmod handles who can view or run files using numeric (777) or symbolic (u+x) codes.' },
-          { title: 'Automation', description: 'Bash scripts allow executing complex workflows with a single trigger.' }
+          { title: 'Topology', description: 'The layout configuration of a network.' },
+          { title: 'Hub/Switch', description: 'The central controller in a Star topology.' }
+        ]
+      },
+      {
+        name: 'Network Types (LAN, MAN, WAN, PAN)',
+        summary: 'Categorizing networks based on their geographical scale.',
+        content: `### Network Scale Categories
+- **PAN (Personal Area Network)**: Range of a few meters. Bluetooth, Zigbee.
+- **LAN (Local Area Network)**: Covers a home, office, or small campus. Uses Ethernet or Wi-Fi. High speed, privately owned.
+- **MAN (Metropolitan Area Network)**: Covers a city. E.g., Cable TV networks or city-wide WiMAX.
+- **WAN (Wide Area Network)**: Covers a large geographical area (country/continent). Connects multiple LANs across public or leased lines. The Internet is the largest WAN.`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Difference between LAN and WAN bandwidth/ownership.',
+          'Identifying PAN examples.'
+        ],
+        details: [
+          { title: 'LAN', description: 'High speed, local scope, typically Ethernet/Wi-Fi.' },
+          { title: 'WAN', description: 'Lower speed, long-distance, reliant on telecom providers.' }
+        ]
+      },
+      {
+        name: 'Network Hardware',
+        summary: 'The physical devices that direct traffic across networks.',
+        content: `### Core Hardware
+- **NIC (Network Interface Card)**: Circuitry installed in a host to connect to a network. Contains the MAC address.
+- **Hub**: A simple device that broadcasts incoming data to all ports. Dumb and creates collisions.
+- **Switch**: Intelligent. Forwards data only to the specific port where the destination MAC address lives.
+- **Router**: Connects differently addressed networks (like your home LAN to the ISP's WAN). Routes packets based on IP addresses.
+- **Modem**: Modulates/Demodulates digital data to analog signals (for fiber, cable, or phone lines).`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Switch vs Hub efficiency.',
+          'Function of a Router.'
+        ],
+        details: [
+          { title: 'MAC Address', description: 'A unique physical ID burned into every NIC.' },
+          { title: 'Router', description: 'Connects multiple networks and chooses the best path for packets.' }
+        ]
+      },
+      {
+        name: 'The OSI Reference Model',
+        summary: 'A 7-layer theoretical framework explaining network communication.',
+        content: `The **Open Systems Interconnection (OSI)** model divides network architecture into 7 conceptual layers.
+
+1. **Physical**: Raw 0s and 1s over a medium (cables, frequency).
+2. **Data Link**: Node-to-node delivery, error checking, MAC addressing (Switches).
+3. **Network**: End-to-end routing, IP addressing (Routers).
+4. **Transport**: Reliable process-to-process delivery, segmentation, Error recovery (TCP/UDP).
+5. **Session**: Establishes, maintains, and terminates communication sessions.
+6. **Presentation**: Data translation, encryption, and compression (SSL/TLS).
+7. **Application**: Network applications engaging with the user (HTTP, FTP, SMTP).`,
+        visual: {
+          type: 'layers',
+          data: ['7: Application', '6: Presentation', '5: Session', '4: Transport', '3: Network', '2: Data Link', '1: Physical']
+        },
+        examFocus: [
+          'Naming all 7 layers in order.',
+          'Responsibilities of the Network and Transport layers.'
+        ],
+        details: [
+          { title: 'Encapsulation', description: 'As data moves down the layers, headers are added at each step.' },
+          { title: 'Layer 3', description: 'Network Layer. Responsible for IP Routing.' }
+        ]
+      },
+      {
+        name: 'The TCP/IP Protocol Suite',
+        summary: 'The actual 4-layer framework that powers the modern Internet.',
+        content: `While OSI is theoretical, **TCP/IP** is the practical architecture of the internet.
+
+### TCP/IP Layers
+1. **Network Access Layer**: Maps to OSI Physical and Data Link. Handled by drivers/hardware.
+2. **Internet Layer**: Maps to OSI Network. The IP protocol lives here.
+3. **Transport Layer**: Maps to OSI Transport. Handles **TCP** (reliable, ordered) and **UDP** (fast, unreliable, used for video/games).
+4. **Application Layer**: Maps to OSI Top 3 layers. Handles high-level protocols like HTTP, DNS, and SMTP.`,
+        visual: {
+          type: 'stack',
+          data: ['Application', 'Transport (TCP/UDP)', 'Internet (IP)', 'Network Access']
+        },
+        examFocus: [
+          'Mapping TCP/IP layers to OSI layers.',
+          'Differences between TCP and UDP.'
+        ],
+        details: [
+          { title: 'TCP', description: 'Transmission Control Protocol. Ensures all packets arrive perfectly via handshakes.' },
+          { title: 'UDP', description: 'User Datagram Protocol. Fires packets blindly for maximum speed.' }
+        ]
+      },
+      {
+        name: 'IP Addressing (IPv4 vs IPv6)',
+        summary: 'The logical addressing system used to find hosts across the globe.',
+        content: `Every device on a network needs a logical address to communicate.
+
+### IPv4
+- **Structure**: 32-bit address, normally written as four decimal octets (e.g., \`192.168.1.1\`).
+- **Limitation**: Only ~4.3 billion addresses, which we have exhausted. Use of NAT helps delay the shortage.
+
+### IPv6
+- **Structure**: 128-bit address, written in 8 groups of 4 hexadecimal digits (e.g., \`2001:0db8:85a3:0000:0000:8a2e:0370:7334\`).
+- **Advantage**: Trillions of times more addresses than IPv4, ensuring we never run out. Includes built-in auto-configuration and better security.`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Address space size differences (32-bit vs 128-bit).',
+          'Recognizing the visual format of IPv4 vs IPv6.'
+        ],
+        details: [
+          { title: 'Octet', description: 'An 8-bit section of an IPv4 address.' },
+          { title: 'NAT', description: 'Network Address Translation. Allows multiple private IPs to map to one public IP.' }
+        ]
+      },
+      {
+        name: 'DNS and DHCP',
+        summary: 'Crucial infrastructure protocols for human-friendly web usage and IP allocation.',
+        content: `### DNS (Domain Name System)
+Humans remember names (\`google.com\`); computers need IPs (\`142.250.190.46\`).
+- **Function**: DNS is the phonebook of the internet. It translates domain names into IP addresses.
+- **Hierarchy**: Root servers -> Top-Level Domain (.com) servers -> Authoritative Name Servers.
+
+### DHCP (Dynamic Host Configuration Protocol)
+- **Function**: Automatically assigns IP addresses, subnet masks, and default gateways to devices when they join a network.
+- **Advantage**: Prevents IP conflicts and saves humans from having to manually type IP configurations for every phone and laptop in an office.`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'The specific purpose of DNS translation.',
+          'Why DHCP is essential for enterprise LANs.'
+        ],
+        details: [
+          { title: 'DNS Resolution', description: 'The process of querying databases to find the IP attached to a domain.' },
+          { title: 'Dynamic IP', description: 'An IP address loaned temporarily to a device by a DHCP server.' }
+        ]
+      },
+      {
+        name: 'Network Security & Firewalls',
+        summary: 'Protecting network perimeters and securing data in transit.',
+        content: `A massive part of networking is keeping out malicious actors.
+
+### Firewall
+A network security device that monitors and filters incoming and outgoing traffic based on an organization's previously established security policies.
+- It acts as a barrier separating a trusted internal network from the untrusted Internet.
+
+### VPN (Virtual Private Network)
+- Creates a secure, encrypted "tunnel" over a less secure network (the public internet).
+- **Purpose**: Allows remote workers to securely access office servers, or masks a user's location and data from ISPs/hackers.
+
+### Cryptography Basics
+- **Symmetric**: The same key encrypts and decrypts (fast, risky to share key).
+- **Asymmetric**: Public key encrypts, Private key decrypts (slower, extremely secure). SSL/TLS uses this.`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Role of a Firewall.',
+          'How a VPN secures a public connection.',
+          'Symmetric vs Asymmetric encryption basics.'
+        ],
+        details: [
+          { title: 'Firewall Filter', description: 'Rules like "Block all traffic on port 80" or "Only allow this IP." ' },
+          { title: 'Encryption', description: 'Scrambling data so it is illegible without the decryption key.' }
+        ]
+      },
+      {
+        name: 'The World Wide Web & ISP',
+        summary: 'The client-server application layer and how users connect globally.',
+        content: `### The Web (WWW)
+The Web is just one service acting *on top* of the Internet infrastructure. It uses **HTTP/HTTPS** protocols.
+- **Client**: Web browsers that request pages (Chrome, Edge).
+- **Server**: Powerful computers that host websites (Apache, Nginx).
+- **URL (Uniform Resource Locator)**: The web address (e.g., \`https://www.example.com\`).
+
+### ISP (Internet Service Provider)
+A company that provides individuals and organizations access to the internet.
+- **Tier 1**: Global backbone owners (AT&T, Verizon).
+- **Tier 2/3**: Local providers who buy bandwidth from Tier 1 companies to sell to homes.`,
+        visual: {
+          type: 'stack',
+          data: ['Client (Browser)', 'Internet (TCP/IP)', 'Web Server (Data)', 'Database (Storage)']
+        },
+        examFocus: [
+          'Difference between the Internet (Hardware/Infrastructure) and the Web (Software/Pages).',
+          'Role of the Client vs the Server.'
+        ],
+        details: [
+          { title: 'HTTP', description: 'Hypertext Transfer Protocol. The foundation of data communication for the Web.' },
+          { title: 'ISP', description: 'The gateway company granting you a valid public IP to reach the broader network.' }
         ]
       }
     ]
@@ -658,192 +928,356 @@ free -m
     icon: Layout,
     topics: [
       { 
-        name: 'The Delivery Cycle', 
+        name: 'Fundamentals of Web Delivery', 
         summary: 'The sequence of events from URL entry to page rendering.',
-        content: `Web design isn't just about code; it's about the delivery system.
+        content: `Web design involves understanding the complete environment where web pages operate.
 
 ### Delivery Lifecycle
-1. **Request**: Connection via HTTP/HTTPS. **HTTPS** is critical today for its SSL/TLS encryption.
-2. **DNS**: Locating the server.
-3. **Fetch**: Retrieving HTML, CSS, and JS files.
-4. **CDN**: Speeding up delivery by serving assets from local edge servers.
-5. **DOM Build**: The browser renders the page structure.
+1. **Request**: Connection via HTTP/HTTPS. **HTTPS** adds SSL/TLS for encryption.
+2. **DNS Resolution**: The browser finds the IP of the server.
+3. **Fetch**: Retrieving HTML, CSS, and JS files from the server.
+4. **DOM Build**: The browser parses the HTML and renders the page structure visually.
 
-### Content Types
-- **Static**: The same file is sent to every user (fastest).
-- **Dynamic**: Servers like PHP or ASP.NET generate custom HTML for each user based on data (e.g., social feed).`,
+### Static vs Dynamic
+- **Static Website**: Pre-written HTML sent exactly as stored on the disk. Fast, cheap, difficult to maintain for large sites.
+- **Dynamic Website**: A backend server (like Node.js, PHP, Python) connects to a database and dynamically generates customized HTML for every user request (like Facebook or Amazon).`,
         visual: {
           type: 'flow',
-          data: ['URL Entry', 'DNS Lookup', 'TCP Handshake', 'HTML Transfer', 'DOM Render']
+          data: ['URL Entry', 'DNS Lookup', 'TCP Handshake', 'Data Transfer', 'DOM Render']
         },
         examFocus: [
-          'Components of Web (Server, Client, Content).',
-          'Difference between HTTP and HTTPS.',
-          'Role of CDNs in content delivery.'
+          'Steps in loading a webpage.',
+          'Static vs Dynamic web applications.',
+          'Significance of HTTPS.'
         ],
         details: [
-          { title: 'HTTP/HTTPS', description: 'The rules of data exchange. HTTPS adds SSL/TLS for encryption.' },
-          { title: 'CDN Distribution', description: 'Edge nodes reduce latency by serving files from locations closer to the client.' },
-          { title: 'Static vs Dynamic', description: 'Static is pre-built; Dynamic is generated at runtime based on user data/input.' },
-          { title: 'Web Clients', description: 'Web browsers (Chrome, Firefox) that interpret code and render the visual UI.' }
+          { title: 'DOM', description: 'Document Object Model. The browser\'s memory-tree of your HTML tags.' },
+          { title: 'HTTPS', description: 'Hypertext Transfer Protocol Secure. Crucial for protecting user data.' }
         ]
       },
       { 
-        name: 'HTML Structure & Semantics', 
-        summary: 'Using markup tags to define meaning and hierarchy in web documents.',
-        content: `**HTML (HyperText Markup Language)** defines the structure and meaning of web content.
+        name: 'HTML5 Structure & Semantic Tags', 
+        summary: 'Using modern markup to define meaning and hierarchy in web documents.',
+        content: `**HTML (HyperText Markup Language)** defines the structure.
 
-### Basic Syntax
+### Basic Boilerplate
 \`\`\`html
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
     <title>Page Title</title>
   </head>
   <body>
-    <h1>Main Heading</h1>
-    <p>This is a paragraph.</p>
-    <a href="https://google.com">A Link</a>
+    <!-- Content goes here -->
   </body>
 </html>
 \`\`\`
 
-### Common Tags
-- **Headings**: \`<h1>\` to \`<h6>\` (h1 is largest).
-- **Lists**: \`<ul>\` (unordered/bullets), \`<ol>\` (ordered/numbered).
-- **Media**: \`<img src="image.jpg" alt="description">\`.
-
-### Tables & Forms
-Tables organize research:
-\`\`\`html
-<table border="1">
-  <tr>
-    <th colspan="2">Student Data</th>
-  </tr>
-  <tr>
-    <td>ID</td>
-    <td>Name</td>
-  </tr>
-</table>
-\`\`\`
-
-### Forms gather input:
-\`\`\`html
-<form action="/submit" method="POST">
-  <input type="text" name="name" placeholder="Name">
-  <input type="submit" value="Register">
-</form>
-\`\`\``,
+### Semantic Tags
+Before HTML5, developers used \`<div>\` for everything. Now we use **Semantic Tags** that describe their own purpose. This vastly improves SEO (Search Engines) and Accessibility (Screen Readers for the blind).
+- \`<header>\`: Logo and main nav.
+- \`<nav>\`: Navigation links.
+- \`<main>\`: The primary content of the document.
+- \`<article>\`: A self-contained piece of content (like a blog post).
+- \`<aside>\`: Sidebars.
+- \`<footer>\`: Copyright and bottom links.`,
         visual: {
           type: 'layers',
-          data: ['Document Head', 'Navigation', 'Main Section', 'Nested Elements', 'Footer']
+          data: ['<header>', '<nav>', '<main> and <aside>', '<footer>']
         },
         examFocus: [
-          'Differences between HTML and XHTML.',
-          'Semantic tags for accessibility (article, aside, nav).',
-          'Table merging using colspan and rowspan.'
+          'Structure of the basic HTML document.',
+          'Why Semantic tags are better than generic divs.',
+          'Accessibility benefits.'
         ],
         details: [
-          { title: 'HTML5 Elements', description: 'Modern semantic tags like <nav>, <article>, and <footer> improve SEO/accessibility.' },
-          { title: 'XHTML Strictrness', description: 'Requires closed tags, lowercase names, and quoted attributes for XML compatibility.' },
-          { title: 'Forms', description: 'Gather user specific data using input types like Text, Email, Password, and Radio buttons.' },
-          { title: 'Table Architecture', description: 'Structured grids for data. colspan (horizontal) and rowspan (vertical) enable complex layouts.' }
+          { title: '<head>', description: 'Contains invisible metadata, CSS links, and the page title.' },
+          { title: 'Semantic', description: 'Meaningful, descriptive markup rather than purely presentational markup.' }
         ]
       },
       { 
-        name: 'CSS Styling & Box Model', 
-        summary: 'The aesthetic rules governing layout, spacing, and responsive design.',
-        content: `**CSS (Cascading Style Sheets)** is the language for presentation.
+        name: 'HTML Text Formatting & Links', 
+        summary: 'Writing paragraphs, emphasis, and hyperlinks.',
+        content: `Content needs to be shaped into readable formats.
 
-### Syntax
-\`\`\`css
-selector {
-  property: value;
-}
+### Text Tags
+- **Headings**: \`<h1>\` (Largest, most important) to \`<h6>\` (Smallest).
+- **Paragraphs**: \`<p>\`.
+- **Emphasis**: \`<strong>\` (Bold text, indicates importance) and \`<em>\` (Italicized, indicates emphasis).
 
-h1 {
-  color: navy;
-  font-size: 24px;
-}
+### Lists
+1. **Unordered**: Bullet points.
+\`<ul> <li>Item A</li> </ul>\`
+2. **Ordered**: Numbered lists.
+\`<ol> <li>Step 1</li> </ol>\`
+
+### Hyperlinks
+The core feature of the World Wide Web.
+\`<a href="https://example.com" target="_blank">Click Here</a>\`
+- **href**: The destination address attribute.
+- **target="_blank"**: Opens the link in a new tab.`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Heading hierarchy.',
+          'Ordered vs Unordered list syntax.',
+          'Anatomy of the <a> tag.'
+        ],
+        details: [
+          { title: 'Attribute', description: 'Extra information attached inside a tag (like href="...").' },
+          { title: '<strong> vs <b>', description: 'strong adds semantic importance; <b> is just visual boldness.' }
+        ]
+      },
+      { 
+        name: 'HTML Tables, Forms, & Media', 
+        summary: 'Displaying grids, collecting user input, and embedding images.',
+        content: `### Images
+\`<img src="logo.png" alt="Company Logo" />\`
+- The **alt** attribute is mandatory for screen readers and in case the image fails to load.
+
+### Tables
+Used for rigid grid data (not for page layout!).
+- \`<table>\`: The wrapper.
+- \`<tr>\`: Table Row.
+- \`<th>\`: Table Header cell (bold/centered).
+- \`<td>\`: Table Data cell.
+
+### Forms
+How users send data to the server.
+\`\`\`html
+<form action="/login" method="POST">
+  <label for="username">Name:</label>
+  <input type="text" id="username" name="user">
+  <input type="password" name="pass">
+  <button type="submit">Log In</button>
+</form>
 \`\`\`
+- **GET**: Parameters in URL (bad for passwords).
+- **POST**: Parameters hidden in request body (used for secure login/data submission).`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Structure of tables (tr, td, th).',
+          'The necessity of the img alt attribute.',
+          'GET vs POST form methods.'
+        ],
+        details: [
+          { title: 'Form Input Types', description: 'Text, password, email, radio, checkbox, submit, etc.' },
+          { title: 'Table spanning', description: 'Using colspan="2" makes a cell stretch across two columns.' }
+        ]
+      },
+      { 
+        name: 'CSS Basics & Selectors', 
+        summary: 'Targeting specific elements to apply styles across documents.',
+        content: `**CSS (Cascading Style Sheets)** controls the presentation.
 
-### The Box Model
-Every element is a box consisting of:
-1. **Margin**: Space outside the border.
-2. **Border**: The edge of the box.
-3. **Padding**: Space between border and content.
-4. **Content**: Text or images.
+### Where to write CSS
+1. **Inline**: \`<h1 style="color:red;">\` (Inefficient, overrides everything).
+2. **Internal**: Inside \`<style>\` tags in the document \`<head>\`.
+3. **External**: Linked \`.css\` file *(Industry Standard)*.
 
-### Layout Strategies
-- **Flexbox (1D)**: \`display: flex; justify-content: center;\`.
-- **CSS Grid (2D)**: \`display: grid; grid-template-columns: 1fr 1fr;\`.
-- **Responsive**: 
-\`\`\`css
-@media (max-width: 600px) {
-  body { background-color: lightgrey; }
-}
-\`\`\``,
+### Selectors
+How CSS knows which HTML tags to style.
+1. **Element**: \`h1 { color: blue; }\` (Targets ALL h1s).
+2. **Class (.)**: \`.btn { font-weight: bold; }\` (Targets any tag with \`class="btn"\`. Highly reusable).
+3. **ID (#)**: \`#header { margin: 0; }\` (Targets ONE specific element with \`id="header"\`. Highest specificity).
+
+### Cascading Rules
+If two rules conflict, CSS uses Specificity. ID > Class > Element. If there's a tie, the rule declared *last* wins.`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Difference between Class (.) and ID (#) selectors.',
+          'Inline vs Internal vs External inclusion.',
+          'Understanding CSS Specificity.'
+        ],
+        details: [
+          { title: 'Class', description: 'A grouping attribute. Many elements can share the same Class.' },
+          { title: 'ID', description: 'A strictly unique identifier. Only one element per page can have a given ID.' }
+        ]
+      },
+      { 
+        name: 'The CSS Box Model', 
+        summary: 'The mathematical foundation of physical dimensions on a web page.',
+        content: `Every HTML element is considered a rectangular **Box** by the browser.
+
+### The 4 Layers (From inside out)
+1. **Content**: The text, image, or media. Its size is controlled by \`width\` and \`height\`.
+2. **Padding**: The transparent space *inside* the border, pushing the border away from the content.
+3. **Border**: The actual line encasing the padding and content.
+4. **Margin**: The transparent space *outside* the border, pushing other elements away.
+
+### Box-Sizing Problem
+By default, if you set \`width: 100px\` and \`padding: 20px\`, the total width becomes 140px. 
+**Solution**: Modern developers always use \`box-sizing: border-box;\`. This ensures that padding shrinks the content area inward rather than expanding the total width outward.`,
         visual: {
           type: 'box-model',
           data: {}
         },
         examFocus: [
-          'CSS Box Model layers.',
-          'Flexbox vs CSS Grid layout strategies.',
-          'Responsive design using Media Queries.'
+          'Ordering of the Box Model layers.',
+          'Difference between Padding and Margin.',
+          'The effect of border-box sizing.'
         ],
         details: [
-          { title: 'The Box Model', description: 'Margin (Outer) > Border > Padding (Inner) > Content. Essential for sizing.' },
-          { title: 'Flexbox Logic', description: 'One-dimensional model for alignment and distribution of items in rows/columns.' },
-          { title: 'CSS Grid', description: 'Two-dimensional model for complex structural layout regions using tracks and areas.' },
-          { title: 'Responsive Design', description: 'Uses breakpoints like 768px (Tablet) or 1024px (Desktop) to deliver customized layouts.' }
+          { title: 'Padding', description: 'Internal spacing. Takes the background color of the element.' },
+          { title: 'Margin', description: 'External spacing. Always completely transparent.' }
         ]
       },
       { 
-        name: 'JavaScript & Interactivity', 
-        summary: 'Programming logic that makes static pages interactive and dynamic.',
-        content: `**JavaScript** is the behavior layer of the web.
+        name: 'Page Layouts (Flexbox & CSS Grid)', 
+        summary: 'Modern techniques for aligning items and building complex multi-column designs.',
+        content: `Older methods (Floats/Tables) for webpage layouts were hacky. Today, we use two powerful native modules.
 
-### Language Basics
-\`\`\`javascript
-const now = new Date();
-let message = "Hello, System!";
+### Flexbox (1-Dimensional)
+Best for aligning items in a single Row OR a single Column.
+- **Parent**: \`display: flex;\`
+- **Justify Content**: Aligns items on the main axis (e.g., left/right in a row). *Options: center, space-between, flex-end.*
+- **Align Items**: Aligns items on the cross axis (e.g., up/down in a row).
 
-if (confirm("Show status?")) {
-  alert("Current Date/Time: " + now.toLocaleString());
+### CSS Grid (2-Dimensional)
+Best for complex overarching page layouts containing both Rows AND Columns simultaneously (like a checkerboard).
+- **Parent**: \`display: grid;\`
+- **Template definition**: \`grid-template-columns: 200px 1fr 1fr;\` (Creates a 200px sidebar and two equal flexible columns).
+- **Grid Gaps**: Easily adds perfectly even spacing between rows and columns.`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Understanding Flexbox is 1D and Grid is 2D.',
+          'Using justify-content to center elements.'
+        ],
+        details: [
+          { title: 'Flex-direction', description: 'Determines if elements flow standard (row) or stacked (column).' },
+          { title: 'fr unit', description: '"Fraction". A flexible unit in CSS Grid that takes up remaining space.' }
+        ]
+      },
+      { 
+        name: 'Responsive Web Design', 
+        summary: 'Techniques to make websites look good on desktop monitors, tablets, and phones.',
+        content: `Websites must adapt dynamically to the screen size of the device loading them.
+
+### Core Principles
+1. **Fluid Grids**: Using percentages (\`width: 50%\`) or flexible units (\`vw\`, \`vh\`, \`fr\`) rather than rigid pixels (\`width: 500px\`).
+2. **Flexible Images**: \`max-width: 100%; height: auto;\` ensures an image scales down to fit small screens but never exceeds its original resolution on big screens.
+3. **Media Queries**: CSS rules that act as conditional logic.
+
+### Media Queries
+\`\`\`css
+/* Base styles for mobile devices go here */
+
+@media (min-width: 768px) {
+  /* These styles ONLY apply on screens wider than a tablet */
+  .sidebar { display: block; }
 }
 \`\`\`
+**Mobile-First Design**: Writing the default CSS for a smartphone, then using \`min-width\` media queries to add complexity as the screen gets wider.`,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Syntax and purpose of a Media Query.',
+          'Concept of Mobile-First vs Desktop-First development.',
+          'Why rigid pixels break responsive sites.'
+        ],
+        details: [
+          { title: 'Breakpoint', description: 'The specific pixel width (like 768px) where a media query triggers a layout shift.' },
+          { title: 'Viewport Meta Tag', description: 'Crucial HTML tag ensuring phones don\'t "zoom out" to emulate a desktop screen.' }
+        ]
+      },
+      { 
+        name: 'JavaScript Fundamentals', 
+        summary: 'Programming logic, variables, and structures that compute data.',
+        content: `**JavaScript** adds logic and behavior.
 
-### DOM Interaction
-Select elements and change them on the fly:
+### Variables
+- \`var\`: Legacy. Avoid.
+- \`let\`: For variables that will change. Block-scoped.
+- \`const\`: For constants that should never change.
+
+### Data Types
+- Primitive: \`String\` ("Hello"), \`Number\` (42), \`Boolean\` (true/false), \`Null\`, \`Undefined\`.
+- Complex: \`Array\` (\`[1, 2, 3]\`), \`Object\` (\`{ name: "John", age: 30 }\`).
+
+### Control Structures
+- **If/Else**: Branching logic.
+  \`if (age >= 18) { allowEntry(); }\`
+- **Loops**: For iterating over data or repeating actions.
+  \`for (let i = 0; i < 5; i++) { ... }\`
+
+### Functions
+Reusable blocks of code.
 \`\`\`javascript
-const button = document.getElementById("trigger");
-const output = document.querySelector(".result");
+function add(a, b) {
+  return a + b;
+}
+// Arrow function syntax (modern)
+const multiply = (x, y) => x * y;
+\`\`\``,
+        visual: {
+          type: 'none',
+          data: null
+        },
+        examFocus: [
+          'Difference between let and const.',
+          'Identifying Data Types (Array vs Object vs Primitive).',
+          'Basic syntax of functions and loops.'
+        ],
+        details: [
+          { title: 'Let vs Const', description: 'Always default to const unless you are certain the value must be rewritten later.' },
+          { title: 'Boolean', description: 'A true or false value, essential for conditional logic.' }
+        ]
+      },
+      { 
+        name: 'DOM Manipulation & Events', 
+        summary: 'How JavaScript bridges the gap between raw data logic and the visible HTML interface.',
+        content: `JavaScript wouldn't be useful for web design if it couldn't talk to the HTML.
 
-button.addEventListener("click", () => {
-  output.innerText = "Interactivity Active!";
-  output.style.color = "gold";
+### The DOM
+The **Document Object Model (DOM)** is a programming interface object created by the browser. It represents the HTML document as a tree structure that JS can query and alter.
+
+### Selecting Elements
+- \`document.getElementById("myBtn")\` (Fast, returns one).
+- \`document.querySelector(".card")\` (Modern, returns the first match of a CSS selector).
+- \`document.querySelectorAll(".card")\` (Returns an array-like list of all matches).
+
+### Modifying Elements
+Once selected, you can change them:
+- \`element.innerText = "New Title";\`
+- \`element.style.backgroundColor = "green";\`
+- \`element.classList.add("hidden");\`
+
+### Event Listeners
+Code that waits for the user to do something.
+\`\`\`javascript
+const btn = document.querySelector("#submitBtn");
+
+btn.addEventListener("click", function(event) {
+    alert("Button was clicked!");
 });
 \`\`\`
-
-### Key Features
-- **Interactivity**: Buttons, forms, and pop-ups.
-- **Dynamic Content**: Updating data without page reloads.
-- **Validation**: Checking user inputs before sending to server.`,
+Common events: \`click\`, \`mouseover\`, \`keydown\`, \`submit\`.`,
         visual: {
           type: 'flow',
           data: ['User Event', 'Event Captured', 'JS Logic Processed', 'DOM UI Updated']
         },
         examFocus: [
-          'DOM manipulation techniques (selection/modification).',
-          'Handling events and trigger-based behavior.',
-          'Variable scope (let vs const) and basic logic structures.'
+          'What the acronym DOM stands for.',
+          'Difference between getElementById and querySelector.',
+          'Writing a basic event listener.'
         ],
         details: [
-          { title: 'The DOM Tree', description: 'A structural interface that represents HTML as a tree that scripts can traverse.' },
-          { title: 'Event Handlers', description: 'Using addEventListener to catch user interactions like clicks or form submissions.' },
-          { title: 'Variable Control', description: 'let and const enable safer, predictable memory usage compared to legacy var.' },
-          { title: 'Interactive logic', description: 'Using conditionals and functions to create complex UI behaviors like sliders or tabs.' }
+          { title: 'DOM Tree', description: 'The hierarchical representation of parent and child tags in memory.' },
+          { title: 'addEventListener()', description: 'The standard method for attaching responsive logic to an HTML element.' }
         ]
       }
     ]

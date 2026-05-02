@@ -8,7 +8,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-th-bg p-6 md:p-12 lg:p-24">
       <div className="max-w-3xl mx-auto">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-tighter hover:underline underline-offset-4 mb-20 text-th-text">
+        <Link href="/" className="inline-flex items-center gap-3 px-6 py-3 border-4 border-th-border font-black uppercase tracking-widest text-xs hover:bg-th-text hover:text-th-bg transition-all shadow-[4px_4px_0px_var(--border-primary)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none bg-th-bg mb-20 text-th-text">
           <ArrowLeft className="w-4 h-4" />
           System Dashboard
         </Link>

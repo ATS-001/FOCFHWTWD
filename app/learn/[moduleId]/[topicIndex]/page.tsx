@@ -149,10 +149,10 @@ export default function TopicPage() {
     <div className="min-h-screen bg-th-bg transition-colors duration-300">
       {/* Navigation Header */}
       <nav className="sticky top-0 z-50 bg-th-bg border-b-2 border-th-border px-6 py-4 flex items-center justify-between">
-        <Link href="/learn" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-tighter hover:opacity-70 text-th-text">
+        <Link href="/learn" className="inline-flex items-center gap-3 px-6 py-3 border-2 border-th-border font-black uppercase tracking-widest text-xs hover:bg-th-text hover:text-th-bg transition-all shadow-[4px_4px_0px_var(--border-primary)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none bg-th-bg text-th-text">
           <ArrowLeft className="w-4 h-4" />
           <span className="hidden md:inline italic uppercase">Subsystem {moduleId}: {currentModule.title}</span>
-          <span className="md:hidden">Back</span>
+          <span className="md:hidden">Terminal Hub</span>
         </Link>
         
         <div className="flex items-center gap-4">
@@ -162,7 +162,7 @@ export default function TopicPage() {
         </div>
       </nav>
 
-      <main className="max-w-6xl mx-auto px-6 py-12 md:py-20 lg:grid lg:grid-cols-[1fr_300px] lg:gap-16">
+      <main className="max-w-6xl mx-auto px-6 pt-12 pb-40 md:py-20 lg:grid lg:grid-cols-[1fr_300px] lg:gap-16">
         <motion.article
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -221,7 +221,7 @@ export default function TopicPage() {
           </section>
 
           {/* Footer Navigation */}
-          <footer className="mt-24 pt-12 border-t-4 border-th-border grid grid-cols-1 md:grid-cols-2 gap-px bg-th-border rounded-sm overflow-hidden">
+          <footer className="mt-24 mb-32 md:mb-16 pt-12 border-t-4 border-th-border grid grid-cols-1 md:grid-cols-2 gap-px bg-th-border rounded-sm overflow-hidden">
             <div className="bg-th-bg p-8 md:p-12">
               <button 
                 disabled={!prevTopic}
@@ -233,7 +233,7 @@ export default function TopicPage() {
                   Reverse Sequence
                 </div>
                 {prevTopic && (
-                  <span className="text-2xl md:text-4xl font-black uppercase tracking-tighter group-hover:underline decoration-th-accent underline-offset-8 decoration-4">
+                  <span className="text-2xl md:text-4xl font-black uppercase tracking-tighter group-hover:underline decoration-th-accent underline-offset-8 decoration-4 leading-snug pb-1">
                     {prevTopic.name}
                   </span>
                 )}
@@ -251,7 +251,7 @@ export default function TopicPage() {
                   <ChevronRight className="w-4 h-4" />
                 </div>
                 {nextTopic && (
-                  <span className="text-2xl md:text-4xl font-black uppercase tracking-tighter group-hover:underline decoration-th-accent underline-offset-8 decoration-4">
+                  <span className="text-2xl md:text-4xl font-black uppercase tracking-tighter group-hover:underline decoration-th-accent underline-offset-8 decoration-4 leading-snug pb-1">
                     {nextTopic.name}
                   </span>
                 )}
