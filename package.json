@@ -19,6 +19,7 @@
     "lucide-react": "^0.553.0",
     "motion": "^12.23.24",
     "next": "^15.4.9",
+    "nextjs-toploader": "^3.9.17",
     "postcss": "^8.5.6",
     "prismjs": "^1.30.0",
     "react": "^19.2.1",

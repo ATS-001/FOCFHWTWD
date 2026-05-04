@@ -33,11 +33,13 @@ export const metadata: Metadata = {
 import { ThemeProvider } from '@/lib/theme-context';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Analytics } from "@vercel/analytics/next";
+import NextTopLoader from 'nextjs-toploader';
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans antialiased" suppressHydrationWarning>
+        <NextTopLoader color="#3b82f6" showSpinner={false} />
         <ThemeProvider>
           {children}
           <ThemeSwitcher />
