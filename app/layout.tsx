@@ -15,9 +15,6 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'FOCFHWTWD | KTU 2024 Scheme',
   description: 'Foundations Of Computing, From HardWare To WebDesign - KTU 2024 Scheme',
-  icons: {
-    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💻</text></svg>',
-  },
   openGraph: {
     title: 'FOCFHWTWD | KTU 2024 Scheme',
     description: 'Foundations Of Computing, From HardWare To WebDesign - KTU 2024 Scheme. Created by Aaron Thalakkottor Sooraj. A part of HexnicAI, a part of ATS_PDZ.',
@@ -39,9 +36,6 @@ import { ThemeSwitcher } from '@/components/theme-switcher';
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <head>
-        <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💻</text></svg>' type="image/svg+xml" />
-      </head>
       <body className="font-sans antialiased" suppressHydrationWarning>
         <ThemeProvider>
           {children}

@@ -705,12 +705,93 @@ Instructions vary by operand count: from **Zero-Address** (stack operations) up 
       {
         name: 'Network Topologies',
         summary: 'The geometric arrangement of nodes and links in a network.',
-        content: `### Topologies
-1. **Star**: All nodes connect to a central hub/switch. Very common. Hub failure brings down the network.
-2. **Bus**: All nodes share one backbone cable. Cheap, but any cable break stops the network.
-3. **Ring**: Nodes are connected in a closed loop. Signal passes in one direction.
-4. **Mesh**: Every node connects to every other node. Extremely reliable but very expensive.
-5. **Tree**: A hierarchical structure combining Star and Bus characteristics.`,
+        content: `### 1. Star Topology
+**Characteristics:** All nodes connect directly to a central device (hub or switch).
+**Diagram:**
+\`\`\`text
+    [Node]
+      |
+[Node]--[Hub/Switch]--[Node]
+      |
+    [Node]
+\`\`\`
+**Advantages:**
+- Easy to install and manage.
+- Failure of one node doesn't affect others.
+- Easy to detect faults and add new nodes.
+**Disadvantages:**
+- Requires more cable than bus topology.
+- Subject to single point of failure (if the central hub fails, the whole network goes down).
+
+### 2. Bus Topology
+**Characteristics:** All nodes share a single common backbone cable.
+**Diagram:**
+\`\`\`text
+[Node]   [Node]   [Node]
+  |        |        |
+======================== (Backbone Cable)
+\`\`\`
+**Advantages:**
+- Very cheap and easy to set up for small networks.
+- Requires less cable length than a star topology.
+**Disadvantages:**
+- If the main cable breaks, the entire network shuts down.
+- Performance degrades as more nodes are added (high collisions).
+- Hard to isolate faults.
+
+### 3. Ring Topology
+**Characteristics:** Nodes are connected in a closed loop. Each node connects exactly to two other nodes.
+**Diagram:**
+\`\`\`text
+   [Node]------[Node]
+     /            \\
+ [Node]          [Node]
+     \\            /
+   [Node]------[Node]
+\`\`\`
+**Advantages:**
+- Data flows in one direction, reducing collisions.
+- Equal access for all nodes.
+**Disadvantages:**
+- A failure of one link can bring down the entire ring.
+- Difficult to add or remove nodes without disrupting the network.
+
+### 4. Mesh Topology
+**Characteristics:** Every single node connects to every other node in the network (Full Mesh).
+**Diagram:**
+\`\`\`text
+ [Node]----------[Node]
+   |  \\        /   |
+   |    \\    /     |
+   |      XX       |
+   |    /    \\     |
+   |  /        \\   |
+ [Node]----------[Node]
+\`\`\`
+**Advantages:**
+- Extremely robust and reliable. Data has multiple paths.
+- No single point of failure.
+- Secure, as point-to-point links are dedicated.
+**Disadvantages:**
+- Extremely expensive and highly complex to wire.
+- High redundancy leads to unused connections.
+
+### 5. Tree Topology
+**Characteristics:** A hierarchical structure combining characteristics of Star and Bus topologies.
+**Diagram:**
+\`\`\`text
+       [Root Switch]
+        /         \\
+  [Switch A]     [Switch B]
+    /    \\         /    \\
+ [N1]    [N2]   [N3]    [N4]
+\`\`\`
+**Advantages:**
+- Highly scalable; easy to add new branches.
+- Fault isolation is relatively easy per branch.
+**Disadvantages:**
+- If the root or backbone fails, the entire segment fails.
+- More difficult to configure than smaller topologies.`,
         visual: {
           type: 'topologies',
           data: ['Star', 'Bus', 'Ring', 'Mesh']
@@ -727,11 +808,41 @@ Instructions vary by operand count: from **Zero-Address** (stack operations) up 
       {
         name: 'Network Types (LAN, MAN, WAN, PAN)',
         summary: 'Categorizing networks based on their geographical scale.',
-        content: `### Network Scale Categories
-- **PAN (Personal Area Network)**: Range of a few meters. Bluetooth, Zigbee.
-- **LAN (Local Area Network)**: Covers a home, office, or small campus. Uses Ethernet or Wi-Fi. High speed, privately owned.
-- **MAN (Metropolitan Area Network)**: Covers a city. E.g., Cable TV networks or city-wide WiMAX.
-- **WAN (Wide Area Network)**: Covers a large geographical area (country/continent). Connects multiple LANs across public or leased lines. The Internet is the largest WAN.`,
+        content: `### 1. PAN (Personal Area Network)
+**Characteristics:**
+- Covers very short distances (usually within 10 meters).
+- Designed for personal devices belonging to a single user.
+- Utilizes wireless technologies like **Bluetooth** or **Zigbee**, or wired via USB.
+**Advantages:** Extremely low power consumption, highly secure due to short range, easy setup without extra infrastructure.
+**Disadvantages:** Very limited range, low data transfer speeds, interference from other personal devices.
+**Example:** A smartphone connected to wireless earbuds and a smartwatch.
+
+### 2. LAN (Local Area Network)
+**Characteristics:**
+- Spans a small geographical area, such as a home, office building, or school campus.
+- Owned, controlled, and managed privately by a single person or organization.
+- Typically uses Ethernet (wired) or Wi-Fi (wireless).
+**Advantages:** High speed (often 1Gbps+), high security since it is private, low error rates, cost-effective resource sharing (like printers and servers).
+**Disadvantages:** Restricted to a small area, administration requires dedicated IT personnel for large offices.
+**Example:** The Wi-Fi network inside your house.
+
+### 3. MAN (Metropolitan Area Network)
+**Characteristics:**
+- Covers a larger geographic area than a LAN, typically spanning a city or a large university campus (e.g., 5 to 50 km).
+- Can be owned by a consortium of users or by a single network provider who sells the service to users.
+- Often formed by interconnecting multiple LANs. Technologies include Fiber Optics, WiMAX.
+**Advantages:** Provides a good backbone for a large urban area, higher speed than WAN, allows sharing of regional resources.
+**Disadvantages:** High installation cost, complex to manage and secure compared to a LAN, vulnerable to city-wide outages if main lines are severed.
+**Example:** A city's cable television network or a city-wide public Wi-Fi grid.
+
+### 4. WAN (Wide Area Network)
+**Characteristics:**
+- Spans large geographical boundaries, such as states, countries, or across the globe.
+- Relies on leased telecommunication lines, satellites, and complex routing across varied regions.
+- Comprises interconnected LANs and MANs.
+**Advantages:** Covers immense geographical areas, allows massive global business operations, centralizes global IT infrastructure.
+**Disadvantages:** Much slower data speeds compared to LANs, high recurring costs for leased links, significantly more susceptible to security threats.
+**Example:** The **Internet** itself is the largest WAN in the world.`,
         visual: {
           type: 'none',
           data: null

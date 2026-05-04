@@ -2,24 +2,16 @@
 
 import { motion } from 'motion/react';
 import Link from 'next/link';
-import { ExternalLink, BookOpen, User, Github, Mail } from 'lucide-react';
+import { ExternalLink, BookOpen, User, Github, Mail, Calculator, FileText, Code } from 'lucide-react';
 
 export default function Page() {
   const buttons = [
-    {
-      id: 'btn-hexnic',
-      label: 'HexnicAI',
-      icon: <ExternalLink className="w-6 h-6" />,
-      href: 'https://hexnicai.vercel.app/',
-      description: 'Visit the main AI hub',
-      external: true
-    },
     {
       id: 'btn-learn',
       label: 'Start Learning',
       icon: <BookOpen className="w-6 h-6" />,
       href: '/learn',
-      description: 'KTU 2024 Syllabus Modules'
+      description: 'KTU Syllabus & Tools'
     },
     {
       id: 'btn-about',
@@ -27,6 +19,14 @@ export default function Page() {
       icon: <User className="w-6 h-6" />,
       href: '/about',
       description: 'Meet the creator'
+    },
+    {
+      id: 'btn-hexnic',
+      label: 'HexnicAI',
+      icon: <ExternalLink className="w-6 h-6" />,
+      href: 'https://hexnicai.vercel.app/',
+      description: 'Visit the main AI hub',
+      external: true
     },
     {
       id: 'btn-github',

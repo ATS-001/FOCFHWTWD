@@ -134,7 +134,7 @@ export default function TopicPage() {
       <div className="min-h-screen flex items-center justify-center p-8 text-center bg-th-bg">
         <div className="space-y-6">
           <h1 className="text-2xl font-black uppercase text-th-text">Data Node Null</h1>
-          <Link href="/learn" className="inline-flex items-center gap-2 border-2 border-th-border px-6 py-3 font-black uppercase hover:bg-th-text hover:text-th-bg transition-all text-th-text">
+          <Link href="/syllabus" className="inline-flex items-center gap-2 border-2 border-th-border px-6 py-3 font-black uppercase hover:bg-th-text hover:text-th-bg transition-all text-th-text">
             <ArrowLeft className="w-4 h-4" />
             Restore to library
           </Link>
@@ -150,7 +150,7 @@ export default function TopicPage() {
     <div className="min-h-screen bg-th-bg transition-colors duration-300">
       {/* Navigation Header */}
       <nav className="sticky top-0 z-50 bg-th-bg border-b-2 border-th-border px-6 py-4 flex items-center justify-between">
-        <Link href="/learn" className="inline-flex items-center gap-3 px-6 py-3 border-2 border-th-border font-black uppercase tracking-widest text-xs hover:bg-th-text hover:text-th-bg transition-all shadow-[4px_4px_0px_var(--border-primary)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none bg-th-bg text-th-text">
+        <Link href="/syllabus" className="inline-flex items-center gap-3 px-6 py-3 border-2 border-th-border font-black uppercase tracking-widest text-xs hover:bg-th-text hover:text-th-bg transition-all shadow-[4px_4px_0px_var(--border-primary)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none bg-th-bg text-th-text">
           <ArrowLeft className="w-4 h-4" />
           <span className="hidden md:inline italic uppercase">Subsystem {moduleId}: {currentModule.title}</span>
           <span className="md:hidden">Terminal Hub</span>
@@ -229,7 +229,7 @@ export default function TopicPage() {
             <div className="bg-th-bg p-8 md:p-12 min-w-0">
               <button 
                 disabled={!prevTopic}
-                onClick={() => router.push(`/learn/${moduleId}/${topicIndex - 1}`)}
+                onClick={() => router.push(`/syllabus/${moduleId}/${topicIndex - 1}`)}
                 className="group w-full flex flex-col items-start gap-4 disabled:opacity-30 text-left text-th-text"
               >
                 <div className="flex items-center gap-2 text-xs font-mono font-black uppercase text-th-text-secondary">
@@ -247,7 +247,7 @@ export default function TopicPage() {
             <div className="bg-th-bg p-8 md:p-12 border-l-2 border-th-border/5 min-w-0">
               <button 
                 disabled={!nextTopic}
-                onClick={() => router.push(`/learn/${moduleId}/${topicIndex + 1}`)}
+                onClick={() => router.push(`/syllabus/${moduleId}/${topicIndex + 1}`)}
                 className="group w-full flex flex-col items-end gap-4 disabled:opacity-30 text-right text-th-text"
               >
                 <div className="flex items-center gap-2 text-xs font-mono font-black uppercase text-th-text-secondary">
