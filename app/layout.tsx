@@ -32,6 +32,7 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from '@/lib/theme-context';
 import { ThemeSwitcher } from '@/components/theme-switcher';
+import { Analytics } from "@vercel/analytics/next";
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
@@ -41,6 +42,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           {children}
           <ThemeSwitcher />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
