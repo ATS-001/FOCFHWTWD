@@ -11,9 +11,7 @@ A modern, interactive learning platform designed for students following the **KT
 
 # 🌐 Live Demo
 
-**Website:** https://your-vercel-link.vercel.app/
-
-> Replace the above URL with your deployed website.
+**Website:** https://focfhwtwd.vercel.app/
 
 ---
 
