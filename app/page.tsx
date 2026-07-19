@@ -22,9 +22,9 @@ export default function Page() {
     },
     {
       id: 'btn-hexnic',
-      label: 'HexnicAI',
+      label: 'C-WATS',
       icon: <ExternalLink className="w-6 h-6" />,
-      href: 'https://hexnicai.vercel.app/',
+      href: 'https://c-wats.vercel.app/',
       description: 'Visit the main AI hub',
       external: true
     },
@@ -116,7 +116,7 @@ export default function Page() {
           </div>
           <div className="text-left md:text-right space-y-2 font-mono text-[10px] md:text-xs text-th-text-secondary uppercase tracking-widest leading-loose">
             <p>Created by Aaron Thalakkottor Sooraj</p>
-            <p>A part of HexnicAI | A part of ATS_PDZ</p>
+            <p>A part of C-WATS | A part of ATS_PDZ</p>
             <p>&copy; 2026 ATS-PDZ</p>
             <p className="font-black text-th-text bg-th-text-secondary/10 px-2 inline-block">SECURED ACCESS ONLY</p>
           </div>

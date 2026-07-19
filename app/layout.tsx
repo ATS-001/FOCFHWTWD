@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: 'Foundations Of Computing, From HardWare To WebDesign - KTU 2024 Scheme',
   openGraph: {
     title: 'FOCFHWTWD | KTU 2024 Scheme',
-    description: 'Foundations Of Computing, From HardWare To WebDesign - KTU 2024 Scheme. Created by Aaron Thalakkottor Sooraj. A part of HexnicAI, a part of ATS_PDZ.',
+    description: 'Foundations Of Computing, From HardWare To WebDesign - KTU 2024 Scheme. Created by Aaron Thalakkottor Sooraj. A part of C-WATS, a part of ATS_PDZ.',
     type: 'website',
     images: [
       {

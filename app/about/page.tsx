@@ -33,7 +33,7 @@ export default function AboutPage() {
             </p>
             
             <p className="p-8 bg-th-bg-secondary border-2 border-th-border/10 font-mono text-sm italic border-l-8 border-l-th-accent text-th-text">
-              &quot;A part of HexnicAI — Bridging the gap between foundational hardware knowledge and cutting-edge software design.&quot;
+              &quot;A part of C-WATS — Bridging the gap between foundational hardware knowledge and cutting-edge software design.&quot;
             </p>
 
             <div className="flex flex-wrap gap-6 pt-12">
@@ -47,13 +47,13 @@ export default function AboutPage() {
                 Connection Established
               </a>
               <a 
-                href="https://hexnicai.vercel.app/"
+                href="https://c-wats.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-10 py-5 border-4 border-th-border font-black uppercase tracking-widest text-xs hover:bg-th-text hover:text-th-bg transition-all shadow-[6px_6px_0px_var(--border-primary)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none bg-th-bg"
+                className="flex items-center gap-3 px-10 py-5 border-4 border-th-border font-black uppercase tracking-widest text-xs hover:bg-th-text hover:text-th-bg transition-all shadow-[6px_6px_0px_var(--border-primary)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none bg-th-bg text-th-text"
               >
                 <Hexagon className="w-5 h-5" />
-                HexnicAI Mainframe
+                C-WATS Mainframe
               </a>
             </div>
           </div>
